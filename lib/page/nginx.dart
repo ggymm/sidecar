@@ -34,9 +34,20 @@ class NginxPageState extends State<NginxPage> {
           children: [
             Text('服务目录'),
             SizedBox(width: 20),
-            Expanded(child: TextBox()),
+            Expanded(child: TextBox(readOnly: true)),
             SizedBox(width: 20),
             Button(onPressed: () {}, child: const Text('修改目录')),
+          ],
+        ),
+        SizedBox(height: 20),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('服务配置'),
+            SizedBox(width: 20),
+            Expanded(
+              child: SizedBox(height: 200.0, child: TextBox(maxLines: null)),
+            ),
           ],
         ),
       ],

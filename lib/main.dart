@@ -76,6 +76,7 @@ class MainPageState extends State<MainPage> {
           body: const SizedBox.shrink(),
           icon: const Icon(FluentIcons.home),
         ),
+        PaneItemHeader(header: const Text('Queue')),
         PaneItemHeader(header: const Text('Storage')),
         PaneItem(
           key: const ValueKey('Redis'),
