@@ -10,9 +10,9 @@ class RedisPage extends StatefulWidget {
 class RedisPageState extends State<RedisPage> {
   @override
   Widget build(BuildContext context) {
-    return const ScaffoldPage(
+    return ScaffoldPage.scrollable(
       header: PageHeader(title: Text('Redis')),
-      content: Text('Redis'),
+      children: [Text('Redis')],
     );
   }
 }

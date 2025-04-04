@@ -8,11 +8,38 @@ class NginxPage extends StatefulWidget {
 }
 
 class NginxPageState extends State<NginxPage> {
+  bool checked = false;
+
   @override
   Widget build(BuildContext context) {
-    return const ScaffoldPage(
+    return ScaffoldPage.scrollable(
       header: PageHeader(title: Text('Nginx')),
-      content: Text('Nginx'),
+      children: [
+        Row(
+          children: [
+            Text('服务状态:'),
+            SizedBox(width: 20),
+            ToggleSwitch(
+              checked: checked,
+              onChanged: (bool value) {
+                setState(() {
+                  checked = value;
+                });
+              },
+            ),
+          ],
+        ),
+        SizedBox(height: 20),
+        Row(
+          children: [
+            Text('服务目录'),
+            SizedBox(width: 20),
+            Expanded(child: TextBox()),
+            SizedBox(width: 20),
+            Button(onPressed: () {}, child: const Text('修改目录')),
+          ],
+        ),
+      ],
     );
   }
 }

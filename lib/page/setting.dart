@@ -10,9 +10,9 @@ class SettingPage extends StatefulWidget {
 class SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
-    return const ScaffoldPage(
+    return ScaffoldPage.scrollable(
       header: PageHeader(title: Text('SettingPage')),
-      content: Text('SettingPage'),
+      children: [Text('SettingPage')],
     );
   }
 }

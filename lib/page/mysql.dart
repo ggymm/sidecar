@@ -10,9 +10,9 @@ class MySQLPage extends StatefulWidget {
 class MySQLPageState extends State<MySQLPage> {
   @override
   Widget build(BuildContext context) {
-    return const ScaffoldPage(
+    return ScaffoldPage.scrollable(
       header: PageHeader(title: Text('MySQL')),
-      content: Text('MySQL'),
+      children: [Text('MySQL')],
     );
   }
 }

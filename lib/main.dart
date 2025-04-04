@@ -13,9 +13,9 @@ void main() async {
   await windowManager.ensureInitialized();
   windowManager.waitUntilReadyToShow(
     WindowOptions(
-      size: Size(1200, 900),
+      size: Size(1280, 800),
       center: true,
-      minimumSize: Size(800, 600),
+      minimumSize: Size(960, 600),
       backgroundColor: Colors.transparent,
       skipTaskbar: false,
       titleBarStyle: TitleBarStyle.hidden,
@@ -35,8 +35,14 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FluentApp.router(
-      theme: FluentThemeData(brightness: Brightness.light),
-      darkTheme: FluentThemeData(brightness: Brightness.dark),
+      theme: FluentThemeData(
+        brightness: Brightness.light,
+        fontFamily: '更纱黑体 SC',
+      ),
+      darkTheme: FluentThemeData(
+        brightness: Brightness.dark,
+        fontFamily: '更纱黑体 SC',
+      ),
       themeMode: ThemeMode.dark,
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,
@@ -58,6 +64,7 @@ class MainPage extends StatefulWidget {
 
 class MainPageState extends State<MainPage> {
   int index = 0;
+
   final searchFocusNode = FocusNode();
   final searchController = TextEditingController();
 
@@ -69,7 +76,7 @@ class MainPageState extends State<MainPage> {
           body: const SizedBox.shrink(),
           icon: const Icon(FluentIcons.home),
         ),
-        PaneItemHeader(header: const Text('Cache')),
+        PaneItemHeader(header: const Text('Storage')),
         PaneItem(
           key: const ValueKey('Redis'),
           body: const SizedBox.shrink(),
@@ -80,7 +87,6 @@ class MainPageState extends State<MainPage> {
           body: const SizedBox.shrink(),
           icon: const Icon(FluentIcons.home),
         ),
-        PaneItemHeader(header: const Text('Queue')),
       ].asMap().entries.map<NavigationPaneItem>((entry) {
         int key = entry.key;
         if (entry.value is PaneItem) {
@@ -113,6 +119,25 @@ class MainPageState extends State<MainPage> {
       },
     ),
   ];
+  late final List<AutoSuggestBoxItem> searchItems =
+      items.where((item) => item is PaneItem).cast<PaneItem>().map((item) {
+        final text = (item.title as Text).data!;
+        return AutoSuggestBoxItem(
+          label: text,
+          value: text,
+          onSelected: () {
+            item.onTap?.call();
+            searchController.clear();
+            searchFocusNode.unfocus();
+            final view = NavigationView.of(context);
+            if (view.compactOverlayOpen) {
+              view.compactOverlayOpen = false;
+            } else if (view.minimalPaneOpen) {
+              view.minimalPaneOpen = false;
+            }
+          },
+        );
+      }).toList();
 
   @override
   void dispose() {
@@ -151,7 +176,7 @@ class MainPageState extends State<MainPage> {
           return const DragToMoveArea(
             child: Align(
               alignment: AlignmentDirectional.centerStart,
-              child: Text('SidecarApp'),
+              child: Text('Sidecar app'),
             ),
           );
         }(),
@@ -165,44 +190,15 @@ class MainPageState extends State<MainPage> {
         autoSuggestBox: Builder(
           builder: (context) {
             return AutoSuggestBox(
+              items: searchItems,
               focusNode: searchFocusNode,
               controller: searchController,
               unfocusedColor: Colors.transparent,
-              items:
-                  <PaneItem>[
-                    ...items.whereType<PaneItemExpander>().expand<PaneItem>((
-                      item,
-                    ) {
-                      return [item, ...item.items.whereType<PaneItem>()];
-                    }),
-                    ...items
-                        .where(
-                          (item) =>
-                              item is PaneItem && item is! PaneItemExpander,
-                        )
-                        .cast<PaneItem>(),
-                  ].map((item) {
-                    final text = (item.title as Text).data!;
-                    return AutoSuggestBoxItem(
-                      label: text,
-                      value: text,
-                      onSelected: () {
-                        item.onTap?.call();
-                        searchFocusNode.unfocus();
-                        searchController.clear();
-                        final view = NavigationView.of(context);
-                        if (view.compactOverlayOpen) {
-                          view.compactOverlayOpen = false;
-                        } else if (view.minimalPaneOpen) {
-                          view.minimalPaneOpen = false;
-                        }
-                      },
-                    );
-                  }).toList(),
               placeholder: 'Search',
             );
           },
         ),
+        autoSuggestBoxReplacement: const Icon(FluentIcons.search),
         items: items,
         footerItems: footerItems,
         selected: calcSelected(context),
