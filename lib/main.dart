@@ -14,7 +14,7 @@ void main() async {
   windowManager.waitUntilReadyToShow(
     WindowOptions(
       size: Size(1280, 800),
-      center: true,
+      // center: true,
       minimumSize: Size(960, 600),
       backgroundColor: Colors.transparent,
       skipTaskbar: false,
@@ -74,7 +74,7 @@ class MainPageState extends State<MainPage> {
         PaneItem(
           key: const ValueKey('Nginx'),
           body: const SizedBox.shrink(),
-          icon: const Icon(FluentIcons.home),
+          icon: Image.asset('assets/icons/nginx.png', width: 18, height: 18),
         ),
         PaneItemHeader(header: const Text('Queue')),
         PaneItemHeader(header: const Text('Storage')),

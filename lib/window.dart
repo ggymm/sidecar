@@ -1,5 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:sidecar/widgets/window_caption.dart';
+import 'package:window_manager/window_manager.dart';
 
 class WindowButtons extends StatelessWidget {
   const WindowButtons({super.key});
