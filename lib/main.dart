@@ -70,23 +70,27 @@ class MainPageState extends State<MainPage> {
 
   late final List<NavigationPaneItem> items =
       [
-        PaneItemHeader(header: const Text('Http')),
+        PaneItemHeader(header: SizedBox(height: 24, child: const Text('Http'))),
         PaneItem(
           key: const ValueKey('Nginx'),
           body: const SizedBox.shrink(),
           icon: Image.asset('assets/icons/nginx.png', width: 18, height: 18),
         ),
-        PaneItemHeader(header: const Text('Queue')),
-        PaneItemHeader(header: const Text('Storage')),
+        PaneItemHeader(
+          header: SizedBox(height: 24, child: const Text('Queue')),
+        ),
+        PaneItemHeader(
+          header: SizedBox(height: 24, child: const Text('Storage')),
+        ),
         PaneItem(
           key: const ValueKey('Redis'),
           body: const SizedBox.shrink(),
-          icon: const Icon(FluentIcons.home),
+          icon: Image.asset('assets/icons/redis.png', width: 18, height: 18),
         ),
         PaneItem(
           key: const ValueKey('MySQL'),
           body: const SizedBox.shrink(),
-          icon: const Icon(FluentIcons.home),
+          icon: Image.asset('assets/icons/mysql.png', width: 18, height: 18),
         ),
       ].asMap().entries.map<NavigationPaneItem>((entry) {
         int key = entry.key;
