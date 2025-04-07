@@ -1,10 +1,10 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sidecar/page/mysql.dart';
-import 'package:sidecar/page/nginx.dart';
-import 'package:sidecar/page/redis.dart';
+import 'package:sidecar/page/app.dart';
 import 'package:sidecar/page/setting.dart';
-import 'package:sidecar/window.dart';
+import 'package:sidecar/route/convert.dart';
+import 'package:sidecar/route/develop.dart';
+import 'package:sidecar/route/snippet.dart';
 import 'package:window_manager/window_manager.dart';
 
 void main() async {
@@ -63,69 +63,128 @@ class MainPage extends StatefulWidget {
 }
 
 class MainPageState extends State<MainPage> {
-  int index = 0;
-
   final searchFocusNode = FocusNode();
   final searchController = TextEditingController();
 
-  late final List<NavigationPaneItem> items =
+  late final List<PaneItem> items = [
+    ...buildFlattened(menuItems),
+    ...buildFlattened(footerItems),
+  ];
+  late final List<NavigationPaneItem> menuItems =
       [
-        PaneItemHeader(header: SizedBox(height: 24, child: const Text('Http'))),
+        PaneItemSeparator(),
         PaneItem(
-          key: const ValueKey('Nginx'),
+          key: const ValueKey('/app'),
+          icon: const Icon(FluentIcons.home),
           body: const SizedBox.shrink(),
-          icon: Image.asset('assets/icons/nginx.png', width: 18, height: 18),
+          title: const Text('全部工具'),
         ),
-        PaneItemHeader(
-          header: SizedBox(height: 24, child: const Text('Queue')),
-        ),
-        PaneItemHeader(
-          header: SizedBox(height: 24, child: const Text('Storage')),
-        ),
-        PaneItem(
-          key: const ValueKey('Redis'),
+        PaneItemExpander(
+          key: const ValueKey('/convert/main'),
+          icon: const Icon(FluentIcons.home),
           body: const SizedBox.shrink(),
-          icon: Image.asset('assets/icons/redis.png', width: 18, height: 18),
+          title: const Text('转换工具'),
+          items: [
+            PaneItem(
+              key: const ValueKey('/convert/base64'),
+              icon: const Icon(FluentIcons.home),
+              body: const SizedBox.shrink(),
+              title: const Text('Base64'),
+            ),
+            PaneItem(
+              key: const ValueKey('/convert/timestamp'),
+              icon: const Icon(FluentIcons.home),
+              body: const SizedBox.shrink(),
+              title: const Text('时间戳'),
+            ),
+          ],
         ),
-        PaneItem(
-          key: const ValueKey('MySQL'),
+        PaneItemExpander(
+          key: const ValueKey('/develop/main'),
+          icon: const Icon(FluentIcons.home),
           body: const SizedBox.shrink(),
-          icon: Image.asset('assets/icons/mysql.png', width: 18, height: 18),
+          title: const Text('开发工具'),
+          items: [
+            PaneItem(
+              key: const ValueKey('/develop/cert'),
+              icon: const Icon(FluentIcons.home),
+              body: const SizedBox.shrink(),
+              title: const Text('证书'),
+            ),
+          ],
         ),
-      ].asMap().entries.map<NavigationPaneItem>((entry) {
-        int key = entry.key;
-        if (entry.value is PaneItem) {
-          PaneItem item = entry.value as PaneItem;
-
-          // 获取 item key 的值
-          String value = (item.key as ValueKey).value;
+        PaneItemExpander(
+          key: const ValueKey('/snippet/main'),
+          icon: const Icon(FluentIcons.home),
+          body: const SizedBox.shrink(),
+          title: const Text('代码片段'),
+          items: [
+            PaneItem(
+              key: const ValueKey('/snippet/java'),
+              icon: const Icon(FluentIcons.home),
+              body: const SizedBox.shrink(),
+              title: const Text('Java'),
+            ),
+          ],
+        ),
+      ].map<NavigationPaneItem>((e) {
+        PaneItem buildItem(PaneItem item) {
           return PaneItem(
             key: item.key,
             icon: item.icon,
             body: item.body,
-            title: Text(value),
+            title: item.title,
             onTap: () {
-              index = key;
-              context.go('/$value');
+              final path = (item.key as ValueKey).value;
+              if (GoRouterState.of(context).uri.toString() != path) {
+                context.go(path);
+              }
+              item.onTap?.call();
             },
           );
         }
-        return entry.value;
+
+        if (e is PaneItemExpander) {
+          return PaneItemExpander(
+            key: e.key,
+            icon: e.icon,
+            body: e.body,
+            title: e.title,
+            items:
+                e.items.map((item) {
+                  if (item is PaneItem) {
+                    return buildItem(item);
+                  }
+                  return item;
+                }).toList(),
+            onTap: () {
+              final path = (e.key as ValueKey).value;
+              if (GoRouterState.of(context).uri.toString() != path) {
+                context.go(path);
+              }
+              e.onTap?.call();
+            },
+          );
+        }
+        if (e is PaneItem) {
+          return buildItem(e);
+        }
+        return e;
       }).toList();
   late final List<NavigationPaneItem> footerItems = [
     PaneItem(
-      key: const ValueKey('Setting'),
+      key: const ValueKey('setting'),
       icon: const Icon(FluentIcons.settings),
       body: const SizedBox.shrink(),
-      title: const Text('Setting'),
+      title: const Text('设置'),
       onTap: () {
-        index = 3;
-        context.go('/Setting');
+        context.go('/setting');
       },
     ),
   ];
+
   late final List<AutoSuggestBoxItem> searchItems =
-      items.where((item) => item is PaneItem).cast<PaneItem>().map((item) {
+      items.map((item) {
         final text = (item.title as Text).data!;
         return AutoSuggestBoxItem(
           label: text,
@@ -152,25 +211,30 @@ class MainPageState extends State<MainPage> {
   }
 
   int calcSelected(BuildContext context) {
-    var loc = GoRouterState.of(context).uri.toString();
-    loc = loc.replaceFirst('/', '');
+    return items.indexWhere(
+      (item) => item.key == Key(GoRouterState.of(context).uri.toString()),
+    );
+  }
 
-    int index = items
-        .where((item) => item.key != null)
-        .toList()
-        .indexWhere((item) => item.key == Key(loc));
-    if (index > 0) {
-      return index;
+  List<PaneItem> buildFlattened(List<NavigationPaneItem> items) {
+    var itemList = <PaneItem>[];
+    for (var item in items) {
+      if (item.key == null) {
+        continue;
+      }
+      if (item is! PaneItem) {
+        continue;
+      }
+
+      // 添加到列表中
+      itemList.add(item);
+      if (item is PaneItemExpander) {
+        itemList.addAll(
+          item.items.where((sub) => sub.key != null).whereType<PaneItem>(),
+        );
+      }
     }
-    int indexFooter = footerItems
-        .where((element) => element.key != null)
-        .toList()
-        .indexWhere((element) => element.key == Key(loc));
-    if (indexFooter < 0) {
-      return 0;
-    }
-    return items.where((item) => item.key != null).toList().length +
-        indexFooter;
+    return itemList;
   }
 
   @override
@@ -187,7 +251,7 @@ class MainPageState extends State<MainPage> {
         }(),
         actions: Row(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: [const WindowButtons()],
+          children: [const MainWindowCaption()],
         ),
         automaticallyImplyLeading: false,
       ),
@@ -204,13 +268,31 @@ class MainPageState extends State<MainPage> {
           },
         ),
         autoSuggestBoxReplacement: const Icon(FluentIcons.search),
-        items: items,
+        items: menuItems,
         footerItems: footerItems,
         selected: calcSelected(context),
       ),
       paneBodyBuilder: (item, child) {
         return widget.child;
       },
+    );
+  }
+}
+
+class MainWindowCaption extends StatelessWidget {
+  const MainWindowCaption({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final FluentThemeData theme = FluentTheme.of(context);
+
+    return SizedBox(
+      width: 138,
+      height: 50,
+      child: WindowCaption(
+        brightness: theme.brightness,
+        backgroundColor: Colors.transparent,
+      ),
     );
   }
 }
@@ -227,11 +309,43 @@ final router = GoRouter(
         );
       },
       routes: <GoRoute>[
-        GoRoute(path: '/', redirect: (context, state) => '/Nginx'),
-        GoRoute(path: '/Nginx', builder: (context, state) => NginxPage()),
-        GoRoute(path: '/Redis', builder: (context, state) => RedisPage()),
-        GoRoute(path: '/MySQL', builder: (context, state) => MySQLPage()),
-        GoRoute(path: '/Setting', builder: (context, state) => SettingPage()),
+        GoRoute(path: '/', redirect: (context, state) => '/app'),
+        GoRoute(path: '/app', builder: (context, state) => AppPage()),
+        GoRoute(path: '/setting', builder: (context, state) => SettingPage()),
+
+        // 转换工具
+        GoRoute(
+          path: '/convert/main',
+          builder: (context, state) => ConvertPage(),
+        ),
+        GoRoute(
+          path: '/convert/base64',
+          builder: (context, state) => Base64ConvertPage(),
+        ),
+        GoRoute(
+          path: '/convert/timestamp',
+          builder: (context, state) => TimestampConvertPage(),
+        ),
+
+        // 开发工具
+        GoRoute(
+          path: '/develop/main',
+          builder: (context, state) => DevelopPage(),
+        ),
+        GoRoute(
+          path: '/develop/cert',
+          builder: (context, state) => CertDevelopPage(),
+        ),
+
+        // 代码片段
+        GoRoute(
+          path: '/snippet/main',
+          builder: (context, state) => SnippetPage(),
+        ),
+        GoRoute(
+          path: '/snippet/java',
+          builder: (context, state) => JavaSnippetPage(),
+        ),
       ],
     ),
   ],
