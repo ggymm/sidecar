@@ -77,25 +77,25 @@ class MainPageState extends State<MainPage> {
           key: const ValueKey('/app'),
           icon: const Icon(FluentIcons.home),
           body: const SizedBox.shrink(),
-          title: const Text('全部工具'),
+          title: const Text('全部工具', overflow: TextOverflow.ellipsis),
         ),
         PaneItemExpander(
           key: const ValueKey('/convert/main'),
           icon: const Icon(FluentIcons.home),
           body: const SizedBox.shrink(),
-          title: const Text('转换工具'),
+          title: const Text('转换工具', overflow: TextOverflow.ellipsis),
           items: [
             PaneItem(
               key: const ValueKey('/convert/base64'),
               icon: const Icon(FluentIcons.home),
               body: const SizedBox.shrink(),
-              title: const Text('Base64'),
+              title: const Text('Base64', overflow: TextOverflow.ellipsis),
             ),
             PaneItem(
               key: const ValueKey('/convert/timestamp'),
               icon: const Icon(FluentIcons.home),
               body: const SizedBox.shrink(),
-              title: const Text('时间戳'),
+              title: const Text('时间日期', overflow: TextOverflow.ellipsis),
             ),
           ],
         ),
@@ -103,13 +103,13 @@ class MainPageState extends State<MainPage> {
           key: const ValueKey('/develop/main'),
           icon: const Icon(FluentIcons.home),
           body: const SizedBox.shrink(),
-          title: const Text('开发工具'),
+          title: const Text('开发工具', overflow: TextOverflow.ellipsis),
           items: [
             PaneItem(
               key: const ValueKey('/develop/cert'),
               icon: const Icon(FluentIcons.home),
               body: const SizedBox.shrink(),
-              title: const Text('证书'),
+              title: const Text('证书', overflow: TextOverflow.ellipsis),
             ),
           ],
         ),
@@ -117,13 +117,13 @@ class MainPageState extends State<MainPage> {
           key: const ValueKey('/snippet/main'),
           icon: const Icon(FluentIcons.home),
           body: const SizedBox.shrink(),
-          title: const Text('代码片段'),
+          title: const Text('代码片段', overflow: TextOverflow.ellipsis),
           items: [
             PaneItem(
               key: const ValueKey('/snippet/java'),
               icon: const Icon(FluentIcons.home),
               body: const SizedBox.shrink(),
-              title: const Text('Java'),
+              title: const Text('Java', overflow: TextOverflow.ellipsis),
             ),
           ],
         ),
@@ -241,14 +241,12 @@ class MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return NavigationView(
       appBar: NavigationAppBar(
-        title: () {
-          return const DragToMoveArea(
-            child: Align(
-              alignment: AlignmentDirectional.centerStart,
-              child: Text('Sidecar app'),
-            ),
-          );
-        }(),
+        title: const DragToMoveArea(
+          child: Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: Text('Sidecar app'),
+          ),
+        ),
         actions: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [const MainWindowCaption()],
@@ -256,6 +254,14 @@ class MainPageState extends State<MainPage> {
         automaticallyImplyLeading: false,
       ),
       pane: NavigationPane(
+        size: const NavigationPaneSize(
+          topHeight: 40,
+          headerHeight: 40,
+          openWidth: 280,
+          openMinWidth: 280,
+          openMaxWidth: 280,
+        ),
+        displayMode: PaneDisplayMode.open,
         autoSuggestBox: Builder(
           builder: (context) {
             return AutoSuggestBox(
