@@ -25,7 +25,12 @@ class Base64ConvertPageState extends State<Base64ConvertPage> {
     });
 
     encode.addListener(() {
-      setState(() {});
+      setState(() {
+        origin.text = '';
+        if (encode.text.isNotEmpty) {
+          origin.text = utf8.decode(base64Decode(encode.text));
+        }
+      });
     });
   }
 
@@ -39,7 +44,7 @@ class Base64ConvertPageState extends State<Base64ConvertPage> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
-      header: PageHeader(title: Text('Base64 转换器')),
+      header: PageHeader(title: Text('Base64 转换工具')),
       content: Padding(
         padding: EdgeInsetsDirectional.only(
           end: PageHeader.horizontalPadding(context),

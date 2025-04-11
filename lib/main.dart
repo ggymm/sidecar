@@ -7,6 +7,8 @@ import 'package:sidecar/route/develop.dart';
 import 'package:sidecar/route/snippet.dart';
 import 'package:window_manager/window_manager.dart';
 
+const double appBarHeight = 40.0;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -95,7 +97,7 @@ class MainPageState extends State<MainPage> {
               key: const ValueKey('/convert/timestamp'),
               icon: const Icon(FluentIcons.home),
               body: const SizedBox.shrink(),
-              title: const Text('时间日期', overflow: TextOverflow.ellipsis),
+              title: const Text('时间戳转换', overflow: TextOverflow.ellipsis),
             ),
           ],
         ),
@@ -173,7 +175,7 @@ class MainPageState extends State<MainPage> {
       }).toList();
   late final List<NavigationPaneItem> footerItems = [
     PaneItem(
-      key: const ValueKey('setting'),
+      key: const ValueKey('/setting'),
       icon: const Icon(FluentIcons.settings),
       body: const SizedBox.shrink(),
       title: const Text('设置'),
@@ -241,10 +243,11 @@ class MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return NavigationView(
       appBar: NavigationAppBar(
+        height: appBarHeight,
         title: const DragToMoveArea(
           child: Align(
             alignment: AlignmentDirectional.centerStart,
-            child: Text('Sidecar app'),
+            child: Text('Sidecar App'),
           ),
         ),
         actions: Row(
@@ -294,7 +297,7 @@ class MainWindowCaption extends StatelessWidget {
 
     return SizedBox(
       width: 138,
-      height: 50,
+      height: appBarHeight,
       child: WindowCaption(
         brightness: theme.brightness,
         backgroundColor: Colors.transparent,
