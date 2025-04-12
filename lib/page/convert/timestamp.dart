@@ -65,6 +65,7 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
   ];
   late final weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+  var value;
   late var normal = '';
   late var iso8601 = '';
   late var rfc7231 = '';
@@ -132,12 +133,11 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
               Row(
                 children: [
                   SizedBox(
-                    width: 360,
+                    width: 240,
                     child: NumberBox(
                       mode: SpinButtonPlacementMode.inline,
-                      value: null,
+                      value: value,
                       onChanged: (int? value) {
-                        print(value);
                         setState(() {
                           // 格式化时间
                           int millisecond = value ?? 0;
@@ -166,6 +166,23 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
                         });
                       },
                       isExpanded: true,
+                    ),
+                  ),
+                  SizedBox(width: 20),
+                  SizedBox(
+                    width: 100,
+                    height: 36,
+                    child: Button(
+                      child: const Text('当前时间'),
+                      onPressed: () {
+                        setState(() {
+                          // 格式化时间
+                          DateTime time = DateTime.now();
+                          unit = 1000;
+                          value = time.millisecondsSinceEpoch;
+                          formatDatetime(time);
+                        });
+                      },
                     ),
                   ),
                 ],
