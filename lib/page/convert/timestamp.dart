@@ -66,7 +66,7 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
   late final weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   var value;
-  late var normal = '';
+  late var common = '';
   late var iso8601 = '';
   late var rfc7231 = '';
 
@@ -100,12 +100,12 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
     var zone = formatTimezone(timezone);
     switch (unit) {
       case 1:
-        normal = "${year}-${month}-${day} ${hour}:${minute}:${second}";
+        common = "${year}-${month}-${day} ${hour}:${minute}:${second}";
         iso8601 = "${year}-${month}-${day}T${hour}:${minute}:${second}${zone}";
         break;
       case 1000:
         String millisecond = time.millisecond.toString().padLeft(3, '0');
-        normal =
+        common =
             "${year}-${month}-${day} ${hour}:${minute}:${second}.${millisecond}";
         iso8601 =
             "${year}-${month}-${day}T${hour}:${minute}:${second}.${millisecond}${zone}";
@@ -177,7 +177,7 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
                       onPressed: () {
                         setState(() {
                           // 格式化时间
-                          DateTime time = DateTime.now();
+                          DateTime time = DateTime.now().toUtc();
                           unit = 1000;
                           value = time.millisecondsSinceEpoch;
                           formatDatetime(time);
@@ -220,7 +220,7 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
         SizedBox(height: 20),
         Card(
           child: Row(
-            children: [Text('Normal'), Text(normal)],
+            children: [Text('Common'), Text(common)],
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
           ),
           padding: EdgeInsets.all(20),

@@ -11,7 +11,7 @@ class CertDevelopPageState extends State<CertDevelopPage> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage.scrollable(
-      header: PageHeader(title: Text('CertDevelop')),
+      header: PageHeader(title: Text('证书')),
       children: [Text('CertDevelop')],
     );
   }

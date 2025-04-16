@@ -7,6 +7,8 @@ import 'package:sidecar/route/develop.dart';
 import 'package:sidecar/route/snippet.dart';
 import 'package:window_manager/window_manager.dart';
 
+import 'icon.dart';
+
 const double appBarHeight = 40.0;
 
 void main() async {
@@ -77,55 +79,67 @@ class MainPageState extends State<MainPage> {
         PaneItemSeparator(),
         PaneItem(
           key: const ValueKey('/app'),
-          icon: const Icon(FluentIcons.home),
+          icon: homeIcon,
           body: const SizedBox.shrink(),
-          title: const Text('全部工具', overflow: TextOverflow.ellipsis),
+          title: const Text('全部工具'),
         ),
         PaneItemExpander(
           key: const ValueKey('/convert/main'),
-          icon: const Icon(FluentIcons.home),
+          icon: appsIcon,
           body: const SizedBox.shrink(),
-          title: const Text('转换工具', overflow: TextOverflow.ellipsis),
+          title: const Text('转换工具'),
           items: [
             PaneItem(
               key: const ValueKey('/convert/base64'),
-              icon: const Icon(FluentIcons.home),
+              icon: base64Icon,
               body: const SizedBox.shrink(),
-              title: const Text('Base64', overflow: TextOverflow.ellipsis),
+              title: const Text('Base64'),
             ),
             PaneItem(
               key: const ValueKey('/convert/timestamp'),
-              icon: const Icon(FluentIcons.home),
+              icon: timestampIcon,
               body: const SizedBox.shrink(),
-              title: const Text('时间戳转换', overflow: TextOverflow.ellipsis),
+              title: const Text('时间戳转换'),
             ),
           ],
         ),
         PaneItemExpander(
           key: const ValueKey('/develop/main'),
-          icon: const Icon(FluentIcons.home),
+          icon: appsIcon,
           body: const SizedBox.shrink(),
-          title: const Text('开发工具', overflow: TextOverflow.ellipsis),
+          title: const Text('开发工具'),
           items: [
             PaneItem(
               key: const ValueKey('/develop/cert'),
-              icon: const Icon(FluentIcons.home),
+              icon: certIcon,
               body: const SizedBox.shrink(),
-              title: const Text('证书', overflow: TextOverflow.ellipsis),
+              title: const Text('证书'),
+            ),
+            PaneItem(
+              key: const ValueKey('/develop/hash'),
+              icon: hashIcon,
+              body: const SizedBox.shrink(),
+              title: const Text('哈希散列'),
+            ),
+            PaneItem(
+              key: const ValueKey('/develop/encrypt'),
+              icon: encryptIcon,
+              body: const SizedBox.shrink(),
+              title: const Text('加解密工具'),
             ),
           ],
         ),
         PaneItemExpander(
           key: const ValueKey('/snippet/main'),
-          icon: const Icon(FluentIcons.home),
+          icon: appsIcon,
           body: const SizedBox.shrink(),
-          title: const Text('代码片段', overflow: TextOverflow.ellipsis),
+          title: const Text('代码片段'),
           items: [
             PaneItem(
               key: const ValueKey('/snippet/java'),
-              icon: const Icon(FluentIcons.home),
+              icon: javaIcon,
               body: const SizedBox.shrink(),
-              title: const Text('Java', overflow: TextOverflow.ellipsis),
+              title: const Text('Java'),
             ),
           ],
         ),
@@ -344,6 +358,14 @@ final router = GoRouter(
         GoRoute(
           path: '/develop/cert',
           builder: (context, state) => CertDevelopPage(),
+        ),
+        GoRoute(
+          path: '/develop/hash',
+          builder: (context, state) => HashDevelopPage(),
+        ),
+        GoRoute(
+          path: '/develop/encrypt',
+          builder: (context, state) => EncryptDevelopPage(),
         ),
 
         // 代码片段

@@ -9,7 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  crypto: 3.0.6
+  file_selector: 1.0.3
   fluent_ui: 4.11.2
+  flutter_svg: 2.0.17
   go_router: 14.8.1
   window_manager: 0.4.3
 
@@ -21,6 +24,4 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/icons/nginx.png
-    - assets/icons/redis.png
-    - assets/icons/mysql.png
+    - assets/icons/
