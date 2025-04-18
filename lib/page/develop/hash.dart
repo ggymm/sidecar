@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:crypto/crypto.dart';
 import 'package:file_selector/file_selector.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:path/path.dart';
+import 'package:sidecar/app.dart';
 
 class HashDevelopPage extends StatefulWidget {
   const HashDevelopPage({super.key});
@@ -18,8 +21,42 @@ class HashDevelopPageState extends State<HashDevelopPage> {
     ComboBoxItem<String>(child: Text('文件类型'), value: 'file'),
   ];
 
-  final inputController = TextEditingController();
-  final outputController = TextEditingController();
+  final input = TextEditingController();
+  final output = TextEditingController();
+
+  hashFile() async {
+    var exec = "";
+    switch (Platform.operatingSystem) {
+      case 'linux':
+        exec = 'hasher-linux';
+        break;
+      case 'macos':
+        exec = 'hasher-macos';
+      case 'windows':
+        exec = 'hasher-windows.exe';
+        break;
+    }
+    final dir = await App.getBinDir();
+    final result = await Process.run(join(dir, "hasher", exec), [input.text]);
+    setState(() {
+      output.text = result.stdout;
+    });
+  }
+
+  hashText() async {
+    final bytes = utf8.encode(input.text);
+    final md5Hash = md5.convert(bytes).toString();
+    final sha1Hash = sha1.convert(bytes).toString();
+    final sha256Hash = sha256.convert(bytes).toString();
+    final sha512Hash = sha512.convert(bytes).toString();
+
+    setState(() {
+      output.text = 'MD5:     $md5Hash';
+      output.text += '\nSHA1:    $sha1Hash';
+      output.text += '\nSHA256:  $sha256Hash';
+      output.text += '\nSHA512:  $sha512Hash';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +75,10 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                   onChanged: (value) {
                     setState(() {
                       type = value!;
-                      inputController.text = ''; // 清空输入框
-                      outputController.text = ''; // 清空输出框
+                      input.text = ''; // 清空输入框
+                      output.text = ''; // 清空输出框
                     });
                   },
-                  isExpanded: true,
                 ),
               ),
             ],
@@ -70,7 +106,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                               final XFile? file = await openFile();
                               if (file != null) {
                                 setState(() {
-                                  inputController.text = file.path;
+                                  input.text = file.path;
                                 });
                               }
                             },
@@ -87,23 +123,12 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                         height: 36,
                         child: Button(
                           child: const Text('计算 Hash'),
-                          onPressed: () {
+                          onPressed: () async {
                             if (type == 'file') {
+                              await hashFile();
                               return;
                             }
-
-                            final bytes = utf8.encode(inputController.text);
-                            final md5Hash = md5.convert(bytes).toString();
-                            final sha1Hash = sha1.convert(bytes).toString();
-                            final sha256Hash = sha256.convert(bytes).toString();
-                            final sha512Hash = sha512.convert(bytes).toString();
-
-                            setState(() {
-                              outputController.text = 'MD5:     $md5Hash';
-                              outputController.text += '\nSHA1:    $sha1Hash';
-                              outputController.text += '\nSHA256:  $sha256Hash';
-                              outputController.text += '\nSHA512:  $sha512Hash';
-                            });
+                            await hashText();
                           },
                         ),
                       ),
@@ -118,7 +143,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                 child: TextBox(
                   maxLines: null,
                   readOnly: type == 'file',
-                  controller: inputController,
+                  controller: input,
                 ),
               ),
             ],
@@ -140,7 +165,8 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                 child: TextBox(
                   maxLines: null,
                   readOnly: true,
-                  controller: outputController,
+                  controller: output,
+                  style: TextStyle(fontFamily: 'Cascadia Mono'),
                 ),
               ),
             ],

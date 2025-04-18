@@ -1,13 +1,12 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sidecar/icon.dart';
 import 'package:sidecar/page/app.dart';
 import 'package:sidecar/page/setting.dart';
 import 'package:sidecar/route/convert.dart';
 import 'package:sidecar/route/develop.dart';
 import 'package:sidecar/route/snippet.dart';
 import 'package:window_manager/window_manager.dart';
-
-import 'icon.dart';
 
 const double appBarHeight = 40.0;
 
