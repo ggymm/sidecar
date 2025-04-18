@@ -8,7 +8,7 @@ import 'package:sidecar/route/develop.dart';
 import 'package:sidecar/route/snippet.dart';
 import 'package:window_manager/window_manager.dart';
 
-const double appBarHeight = 40.0;
+const double appBarHeight = 48.0;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +17,7 @@ void main() async {
   windowManager.waitUntilReadyToShow(
     WindowOptions(
       size: Size(1280, 800),
-      // center: true,
+      center: true,
       minimumSize: Size(960, 600),
       backgroundColor: Colors.transparent,
       skipTaskbar: false,
@@ -121,10 +121,16 @@ class MainPageState extends State<MainPage> {
               title: const Text('哈希散列'),
             ),
             PaneItem(
-              key: const ValueKey('/develop/encrypt'),
-              icon: encryptIcon,
+              key: const ValueKey('/develop/crypto'),
+              icon: cryptoIcon,
               body: const SizedBox.shrink(),
               title: const Text('加解密工具'),
+            ),
+            PaneItem(
+              key: const ValueKey('/develop/qrcode'),
+              icon: certIcon,
+              body: const SizedBox.shrink(),
+              title: const Text('二维码'),
             ),
           ],
         ),
@@ -179,6 +185,7 @@ class MainPageState extends State<MainPage> {
               }
               e.onTap?.call();
             },
+            initiallyExpanded: true,
           );
         }
         if (e is PaneItem) {
@@ -359,12 +366,16 @@ final router = GoRouter(
           builder: (context, state) => CertDevelopPage(),
         ),
         GoRoute(
+          path: '/develop/crypto',
+          builder: (context, state) => CryptoDevelopPage(),
+        ),
+        GoRoute(
           path: '/develop/hash',
           builder: (context, state) => HashDevelopPage(),
         ),
         GoRoute(
-          path: '/develop/encrypt',
-          builder: (context, state) => EncryptDevelopPage(),
+          path: '/develop/qrcode',
+          builder: (context, state) => QrcodeDevelopPage(),
         ),
 
         // 代码片段

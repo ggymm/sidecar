@@ -53,12 +53,20 @@ final Widget hashIcon = SvgPicture.asset(
   semanticsLabel: 'Hash Icon',
 );
 
-final Widget encryptIcon = SvgPicture.asset(
-  'assets/icons/encrypt.svg',
+final Widget cryptoIcon = SvgPicture.asset(
+  'assets/icons/crypto.svg',
   width: size,
   height: size,
   colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-  semanticsLabel: 'Encrypt Icon',
+  semanticsLabel: 'Crypto Icon',
+);
+
+final Widget qrcodeIcon = SvgPicture.asset(
+  'assets/icons/qrcode.svg',
+  width: size,
+  height: size,
+  colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+  semanticsLabel: 'Qrcode Icon',
 );
 
 /// ========== 代码片段 ==========

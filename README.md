@@ -1,15 +1,19 @@
 ## sidecar
 
-### 备忘录
+### 图标路径
 
-### 转换器
+#### linux
 
-#### Base64
+linux/assets/icons/com.ggymm.sidecar.png
 
-#### 时间戳转换
+```
 
+```
 
-### 开发工具
+#### macos
 
+macos/Runner/Assets.xcassets/AppIcon.appiconset/
 
-### 代码片段
+#### windows
+
+windows/runner/resources/app_icon.ico
