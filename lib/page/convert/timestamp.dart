@@ -65,10 +65,22 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
   ];
   late final weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-  var value;
+  var input;
   late var common = '';
   late var iso8601 = '';
   late var rfc7231 = '';
+
+  void runFormat() {
+    int millisecond = input;
+    if (unit == 1) {
+      millisecond = millisecond * 1000;
+    }
+    DateTime time = DateTime.fromMillisecondsSinceEpoch(
+      millisecond,
+      isUtc: true,
+    );
+    formatDatetime(time);
+  }
 
   void formatDatetime(DateTime time) {
     String year, month, day, hour, minute, second, weekday;
@@ -136,20 +148,13 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
                     width: 240,
                     child: NumberBox(
                       mode: SpinButtonPlacementMode.inline,
-                      value: value,
-                      onChanged: (int? value) {
+                      value: input,
+                      onChanged: (int? v) {
                         setState(() {
-                          // 格式化时间
-                          int millisecond = value ?? 0;
-                          if (unit == 1) {
-                            millisecond = millisecond * 1000;
-                          }
-                          DateTime time = DateTime.fromMillisecondsSinceEpoch(
-                            millisecond,
-                            isUtc: true,
-                          );
+                          input = v!;
 
-                          formatDatetime(time);
+                          // 运行格式化方法
+                          runFormat();
                         });
                       },
                     ),
@@ -160,9 +165,12 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
                     child: ComboBox<int>(
                       value: unit,
                       items: units,
-                      onChanged: (value) {
+                      onChanged: (v) {
                         setState(() {
-                          unit = value!;
+                          unit = v!;
+
+                          // 运行格式化方法
+                          runFormat();
                         });
                       },
                       isExpanded: true,
@@ -179,7 +187,7 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
                           // 格式化时间
                           DateTime time = DateTime.now().toUtc();
                           unit = 1000;
-                          value = time.millisecondsSinceEpoch;
+                          input = time.millisecondsSinceEpoch;
                           formatDatetime(time);
                         });
                       },
