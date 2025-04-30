@@ -134,6 +134,19 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+
+    if (input == null) {
+      // 初始化显示
+      DateTime time = DateTime.now().toUtc();
+      unit = 1000;
+      input = time.millisecondsSinceEpoch;
+      formatDatetime(time);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ScaffoldPage.scrollable(
       header: PageHeader(title: Text('时间戳转换工具')),
@@ -168,6 +181,16 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
                       onChanged: (v) {
                         setState(() {
                           unit = v!;
+
+                          // 修改 input
+                          switch (unit) {
+                            case 1:
+                              input = (input / 1000).toInt();
+                              break;
+                            case 1000:
+                              input = (input * 1000).toInt();
+                              break;
+                          }
 
                           // 运行格式化方法
                           runFormat();

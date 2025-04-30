@@ -139,7 +139,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
               ),
               SizedBox(height: 20),
               SizedBox(
-                height: 80,
+                height: 160,
                 child: TextBox(
                   maxLines: null,
                   readOnly: type == 'file',
@@ -161,7 +161,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
               ),
               SizedBox(height: 20),
               SizedBox(
-                height: 120,
+                height: 160,
                 child: TextBox(
                   maxLines: null,
                   readOnly: true,

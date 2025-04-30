@@ -8,27 +8,30 @@ class Base64ConvertPage extends StatefulWidget {
 }
 
 class Base64ConvertPageState extends State<Base64ConvertPage> {
-  final origin = new TextEditingController();
-  final encode = new TextEditingController();
+  final originNode = FocusNode();
+  final originCtrl = TextEditingController();
+
+  final encodeNode = FocusNode();
+  final encodeCtrl = TextEditingController();
 
   @override
   void initState() {
     super.initState();
 
-    origin.addListener(() {
+    originNode.addListener(() {
       setState(() {
-        encode.text = '';
-        if (origin.text.isNotEmpty) {
-          encode.text = base64Encode(utf8.encode(origin.text));
+        final text = originCtrl.text;
+        if (text.isNotEmpty) {
+          encodeCtrl.text = base64Encode(utf8.encode(text));
         }
       });
     });
 
-    encode.addListener(() {
+    encodeNode.addListener(() {
       setState(() {
-        origin.text = '';
-        if (encode.text.isNotEmpty) {
-          origin.text = utf8.decode(base64Decode(encode.text));
+        final text = encodeCtrl.text;
+        if (text.isNotEmpty) {
+          originCtrl.text = utf8.decode(base64Decode(text));
         }
       });
     });
@@ -36,8 +39,8 @@ class Base64ConvertPageState extends State<Base64ConvertPage> {
 
   @override
   void dispose() {
-    origin.dispose();
-    encode.dispose();
+    originNode.dispose();
+    encodeNode.dispose();
     super.dispose();
   }
 
@@ -54,10 +57,10 @@ class Base64ConvertPageState extends State<Base64ConvertPage> {
         child: Column(
           children: [
             Expanded(
-              child: Card(
-                child: Row(
-                  children: [
-                    Expanded(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Card(
                       child: Column(
                         children: [
                           Align(
@@ -71,14 +74,19 @@ class Base64ConvertPageState extends State<Base64ConvertPage> {
                             child: TextBox(
                               minLines: 1,
                               maxLines: null,
-                              controller: origin,
+                              focusNode: originNode,
+                              controller: originCtrl,
                             ),
                           ),
                         ],
                       ),
+                      padding: EdgeInsets.all(20),
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    SizedBox(width: 20),
-                    Expanded(
+                  ),
+                  SizedBox(height: 20),
+                  Expanded(
+                    child: Card(
                       child: Column(
                         children: [
                           Align(
@@ -92,16 +100,17 @@ class Base64ConvertPageState extends State<Base64ConvertPage> {
                             child: TextBox(
                               minLines: 1,
                               maxLines: null,
-                              controller: encode,
+                              focusNode: encodeNode,
+                              controller: encodeCtrl,
                             ),
                           ),
                         ],
                       ),
+                      padding: EdgeInsets.all(20),
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                  ],
-                ),
-                padding: EdgeInsets.all(20),
-                borderRadius: BorderRadius.circular(10),
+                  ),
+                ],
               ),
             ),
           ],
