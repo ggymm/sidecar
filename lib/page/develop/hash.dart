@@ -25,19 +25,8 @@ class HashDevelopPageState extends State<HashDevelopPage> {
   final output = TextEditingController();
 
   hashFile() async {
-    var exec = "";
-    switch (Platform.operatingSystem) {
-      case 'linux':
-        exec = 'hasher-linux';
-        break;
-      case 'macos':
-        exec = 'hasher-macos';
-      case 'windows':
-        exec = 'hasher-windows.exe';
-        break;
-    }
     final dir = await App.getBinDir();
-    final result = await Process.run(join(dir, "hasher", exec), [input.text]);
+    final result = await Process.run(join(dir, "hash", "hash"), [input.text]);
     setState(() {
       output.text = result.stdout;
     });
@@ -99,7 +88,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                       Visibility(
                         child: SizedBox(
                           width: 120,
-                          height: 36,
+                          height: 34,
                           child: Button(
                             child: const Text('选择文件'),
                             onPressed: () async {
@@ -120,10 +109,13 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                       ),
                       SizedBox(
                         width: 120,
-                        height: 36,
+                        height: 34,
                         child: Button(
                           child: const Text('计算 Hash'),
                           onPressed: () async {
+                            if (input.text.isEmpty) {
+                              return;
+                            }
                             if (type == 'file') {
                               await hashFile();
                               return;

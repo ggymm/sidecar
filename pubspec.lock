@@ -141,10 +141,10 @@ packages:
     dependency: "direct main"
     description:
       name: fluent_ui
-      sha256: "8e41dd62b321ec9a4a14cebe1dcb9144d7a32b9cef326332687c1da45d537540"
+      sha256: "569f61002931665b9613ed12008a368d60ae66baab78b6270c4dc8b44f24d1df"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "4.11.2"
+    version: "4.11.3"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -167,10 +167,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_svg
-      sha256: c200fd79c918a40c5cd50ea0877fa13f81bdaf6f0a5d3dbcc2a13e3285d6aa1b
+      sha256: d44bf546b13025ec7353091516f6881f1d4c633993cb109c3916c3a0159dadf1
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.17"
+    version: "2.1.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -185,10 +185,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: f02fd7d2a4dc512fec615529824fdd217fecb3a3d3de68360293a551f21634b3
+      sha256: "2b9ba6d4c247457c35a6622f1dee6aab6694a4e15237ff7c32320345044112b6"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "14.8.1"
+    version: "15.1.1"
   http:
     dependency: transitive
     description:

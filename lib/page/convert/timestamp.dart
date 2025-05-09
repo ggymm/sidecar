@@ -94,7 +94,7 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
 
     // Wed, 02 Jan 2000 04:05:06 GMT
     month = months[time.month - 1];
-    weekday = weekdays[time.weekday];
+    weekday = weekdays[time.weekday - 1];
     rfc7231 =
         "${weekday}, ${day} ${month} ${year} ${hour}:${minute}:${second} GMT";
 
@@ -202,7 +202,7 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
                   SizedBox(width: 20),
                   SizedBox(
                     width: 100,
-                    height: 36,
+                    height: 34,
                     child: Button(
                       child: const Text('当前时间'),
                       onPressed: () {
