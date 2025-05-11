@@ -26,7 +26,9 @@ class HashDevelopPageState extends State<HashDevelopPage> {
 
   hashFile() async {
     final dir = await App.getBinDir();
-    final result = await Process.run(join(dir, "hash", "hash"), [input.text]);
+    final result = await Process.run(join(dir, App.hash, App.hash), [
+      input.text,
+    ]);
     setState(() {
       output.text = result.stdout;
     });

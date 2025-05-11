@@ -1,8 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:file_selector/file_selector.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:path/path.dart';
+import 'package:sidecar/app.dart';
 
 class QrcodeDevelopPage extends StatefulWidget {
   const QrcodeDevelopPage({super.key});
@@ -24,17 +27,17 @@ class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
   );
 
   parseQrcode() async {
-    // XFile xFile = XFile(qrcode);
-    // DecodeParams params = DecodeParams();
-    //
-    // // 解析二维码
-    // Code result = await zx.readBarcodeImagePath(xFile, params);
-    // if (!result.isValid) {
-    //   return;
-    // }
-    // setState(() {
-    //   debugPrint(result.text);
-    // });
+    final dir = await App.getBinDir();
+    final result = await Process.run(join(dir, App.qrcode, App.qrcode), [
+      qrcode,
+    ], stdoutEncoding: utf8);
+    setState(() {
+      if (Platform.isWindows) {
+        output.text = result.stdout;
+      } else {
+        output.text = result.stdout;
+      }
+    });
   }
 
   @override

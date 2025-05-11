@@ -4,6 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 
 class App {
+  static final hash = "hash";
+  static final qrcode = "qrcode";
+
   static Future<String> getDir() async {
     if (kDebugMode) {
       return Directory.current.path;
