@@ -32,11 +32,7 @@ class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
       qrcode,
     ], stdoutEncoding: utf8);
     setState(() {
-      if (Platform.isWindows) {
-        output.text = result.stdout;
-      } else {
-        output.text = result.stdout;
-      }
+      output.text = result.stdout;
     });
   }
 

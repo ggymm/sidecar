@@ -148,132 +148,148 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
 
   @override
   Widget build(BuildContext context) {
+    final height = 80.0;
     return ScaffoldPage.scrollable(
       header: PageHeader(title: Text('时间戳转换工具')),
       children: [
-        Card(
-          child: Row(
-            children: [
-              Text('时间戳'),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 240,
-                    child: NumberBox(
-                      mode: SpinButtonPlacementMode.inline,
-                      value: input,
-                      onChanged: (int? v) {
-                        setState(() {
-                          input = v!;
+        SizedBox(
+          height: height,
+          child: Card(
+            child: Row(
+              children: [
+                Text('时间戳'),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 240,
+                      child: NumberBox(
+                        mode: SpinButtonPlacementMode.inline,
+                        value: input,
+                        onChanged: (int? v) {
+                          setState(() {
+                            input = v!;
 
-                          // 运行格式化方法
-                          runFormat();
-                        });
-                      },
+                            // 运行格式化方法
+                            runFormat();
+                          });
+                        },
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 20),
-                  SizedBox(
-                    width: 100,
-                    child: ComboBox<int>(
-                      value: unit,
-                      items: units,
-                      onChanged: (v) {
-                        setState(() {
-                          unit = v!;
+                    SizedBox(width: 20),
+                    SizedBox(
+                      width: 100,
+                      child: ComboBox<int>(
+                        value: unit,
+                        items: units,
+                        onChanged: (v) {
+                          setState(() {
+                            unit = v!;
 
-                          // 修改 input
-                          switch (unit) {
-                            case 1:
-                              input = (input / 1000).toInt();
-                              break;
-                            case 1000:
-                              input = (input * 1000).toInt();
-                              break;
-                          }
+                            // 修改 input
+                            switch (unit) {
+                              case 1:
+                                input = (input / 1000).toInt();
+                                break;
+                              case 1000:
+                                input = (input * 1000).toInt();
+                                break;
+                            }
 
-                          // 运行格式化方法
-                          runFormat();
-                        });
-                      },
-                      isExpanded: true,
+                            // 运行格式化方法
+                            runFormat();
+                          });
+                        },
+                        isExpanded: true,
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 20),
-                  SizedBox(
-                    width: 100,
-                    height: 34,
-                    child: Button(
-                      child: const Text('当前时间'),
-                      onPressed: () {
-                        setState(() {
-                          // 格式化时间
-                          DateTime time = DateTime.now().toUtc();
-                          unit = 1000;
-                          input = time.millisecondsSinceEpoch;
-                          formatDatetime(time);
-                        });
-                      },
+                    SizedBox(width: 20),
+                    SizedBox(
+                      width: 100,
+                      height: 34,
+                      child: Button(
+                        child: const Text('当前时间'),
+                        onPressed: () {
+                          setState(() {
+                            // 格式化时间
+                            DateTime time = DateTime.now().toUtc();
+                            unit = 1000;
+                            input = time.millisecondsSinceEpoch;
+                            formatDatetime(time);
+                          });
+                        },
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          ),
-          padding: EdgeInsets.all(20),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        SizedBox(height: 20),
-        Card(
-          child: Row(
-            children: [
-              Text('时区选择'),
-              SizedBox(
-                width: 480,
-                child: ComboBox<double>(
-                  value: timezone,
-                  items: timezones,
-                  onChanged: (value) {
-                    setState(() {
-                      timezone = value!;
-                    });
-                  },
-                  isExpanded: true,
+                  ],
                 ),
-              ),
-            ],
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              ],
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ),
+            padding: EdgeInsets.all(20),
+            borderRadius: BorderRadius.circular(10),
           ),
-          padding: EdgeInsets.all(20),
-          borderRadius: BorderRadius.circular(10),
         ),
         SizedBox(height: 20),
-        Card(
-          child: Row(
-            children: [Text('Common'), Text(common)],
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        SizedBox(
+          height: height,
+          child: Card(
+            child: Row(
+              children: [
+                Text('时区选择'),
+                SizedBox(
+                  width: 480,
+                  child: ComboBox<double>(
+                    value: timezone,
+                    items: timezones,
+                    onChanged: (value) {
+                      setState(() {
+                        timezone = value!;
+                      });
+                    },
+                    isExpanded: true,
+                  ),
+                ),
+              ],
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ),
+            padding: EdgeInsets.all(20),
+            borderRadius: BorderRadius.circular(10),
           ),
-          padding: EdgeInsets.all(20),
-          borderRadius: BorderRadius.circular(10),
         ),
         SizedBox(height: 20),
-        Card(
-          child: Row(
-            children: [Text('ISO 8601'), Text(iso8601)],
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        SizedBox(
+          height: height,
+          child: Card(
+            child: Row(
+              children: [Text('Common'), Text(common)],
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ),
+            padding: EdgeInsets.all(20),
+            borderRadius: BorderRadius.circular(10),
           ),
-          padding: EdgeInsets.all(20),
-          borderRadius: BorderRadius.circular(10),
         ),
         SizedBox(height: 20),
-        Card(
-          child: Row(
-            children: [Text('RFC 7231'), Text(rfc7231)],
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        SizedBox(
+          height: height,
+          child: Card(
+            child: Row(
+              children: [Text('ISO 8601'), Text(iso8601)],
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ),
+            padding: EdgeInsets.all(20),
+            borderRadius: BorderRadius.circular(10),
           ),
-          padding: EdgeInsets.all(20),
-          borderRadius: BorderRadius.circular(10),
+        ),
+        SizedBox(height: 20),
+        SizedBox(
+          height: height,
+          child: Card(
+            child: Row(
+              children: [Text('RFC 7231'), Text(rfc7231)],
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ),
+            padding: EdgeInsets.all(20),
+            borderRadius: BorderRadius.circular(10),
+          ),
         ),
       ],
     );

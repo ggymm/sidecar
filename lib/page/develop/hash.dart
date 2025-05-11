@@ -51,124 +51,144 @@ class HashDevelopPageState extends State<HashDevelopPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldPage.scrollable(
-      header: PageHeader(title: Text('哈希散列')),
-      children: [
-        Card(
-          child: Row(
-            children: [
-              Text('输入类型'),
-              SizedBox(
-                width: 120,
-                child: ComboBox<String>(
-                  value: type,
-                  items: types,
-                  onChanged: (value) {
-                    setState(() {
-                      type = value!;
-                      input.text = ''; // 清空输入框
-                      output.text = ''; // 清空输出框
-                    });
-                  },
-                ),
-              ),
-            ],
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          ),
-          padding: EdgeInsets.all(20),
-          borderRadius: BorderRadius.circular(10),
+    return ScaffoldPage(
+      header: PageHeader(title: Text('二维码')),
+      content: Padding(
+        padding: EdgeInsetsDirectional.only(
+          end: PageHeader.horizontalPadding(context),
+          start: PageHeader.horizontalPadding(context),
+          bottom: kPageDefaultVerticalPadding,
         ),
-        SizedBox(height: 20),
-        Card(
-          child: Column(
-            children: [
-              Row(
+        child: Column(
+          children: [
+            Expanded(
+              child: Column(
                 children: [
-                  Text('输入内容'),
-                  Row(
-                    children: [
-                      Visibility(
-                        child: SizedBox(
-                          width: 120,
-                          height: 34,
-                          child: Button(
-                            child: const Text('选择文件'),
-                            onPressed: () async {
-                              final XFile? file = await openFile();
-                              if (file != null) {
+                  SizedBox(
+                    height: 80,
+                    child: Card(
+                      child: Row(
+                        children: [
+                          Text('输入类型'),
+                          SizedBox(
+                            width: 120,
+                            child: ComboBox<String>(
+                              value: type,
+                              items: types,
+                              onChanged: (value) {
                                 setState(() {
-                                  input.text = file.path;
+                                  type = value!;
+                                  input.text = ''; // 清空输入框
+                                  output.text = ''; // 清空输出框
                                 });
-                              }
-                            },
+                              },
+                            ),
                           ),
-                        ),
-                        visible: type == 'file',
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       ),
-                      Visibility(
-                        child: SizedBox(width: 20),
-                        visible: type == 'file',
+                      padding: EdgeInsets.all(20),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Expanded(
+                    child: Card(
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text('输入内容'),
+                              Row(
+                                children: [
+                                  Visibility(
+                                    child: SizedBox(
+                                      width: 120,
+                                      height: 34,
+                                      child: Button(
+                                        child: const Text('选择文件'),
+                                        onPressed: () async {
+                                          final XFile? file = await openFile();
+                                          if (file != null) {
+                                            setState(() {
+                                              input.text = file.path;
+                                            });
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                    visible: type == 'file',
+                                  ),
+                                  Visibility(
+                                    child: SizedBox(width: 20),
+                                    visible: type == 'file',
+                                  ),
+                                  SizedBox(
+                                    width: 120,
+                                    height: 34,
+                                    child: Button(
+                                      child: const Text('计算 Hash'),
+                                      onPressed: () async {
+                                        if (input.text.isEmpty) {
+                                          return;
+                                        }
+                                        if (type == 'file') {
+                                          await hashFile();
+                                          return;
+                                        }
+                                        await hashText();
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          ),
+                          SizedBox(height: 20),
+                          Expanded(
+                            child: TextBox(
+                              maxLines: null,
+                              readOnly: type == 'file',
+                              controller: input,
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        width: 120,
-                        height: 34,
-                        child: Button(
-                          child: const Text('计算 Hash'),
-                          onPressed: () async {
-                            if (input.text.isEmpty) {
-                              return;
-                            }
-                            if (type == 'file') {
-                              await hashFile();
-                              return;
-                            }
-                            await hashText();
-                          },
-                        ),
+                      padding: EdgeInsets.all(20),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Expanded(
+                    child: Card(
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [Text('输出结果')],
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          ),
+                          SizedBox(height: 20),
+                          Expanded(
+                            child: TextBox(
+                              maxLines: null,
+                              readOnly: true,
+                              controller: output,
+                              style: TextStyle(fontFamily: 'Cascadia Mono'),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                      padding: EdgeInsets.all(20),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                 ],
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
               ),
-              SizedBox(height: 20),
-              SizedBox(
-                height: 160,
-                child: TextBox(
-                  maxLines: null,
-                  readOnly: type == 'file',
-                  controller: input,
-                ),
-              ),
-            ],
-          ),
-          padding: EdgeInsets.all(20),
-          borderRadius: BorderRadius.circular(10),
+            ),
+          ],
         ),
-        SizedBox(height: 20),
-        Card(
-          child: Column(
-            children: [
-              Row(
-                children: [Text('输出结果')],
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              ),
-              SizedBox(height: 20),
-              SizedBox(
-                height: 160,
-                child: TextBox(
-                  maxLines: null,
-                  readOnly: true,
-                  controller: output,
-                  style: TextStyle(fontFamily: 'Cascadia Mono'),
-                ),
-              ),
-            ],
-          ),
-          padding: EdgeInsets.all(20),
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ],
+      ),
     );
   }
 }
