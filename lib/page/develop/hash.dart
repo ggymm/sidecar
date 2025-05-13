@@ -52,7 +52,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
-      header: PageHeader(title: Text('二维码')),
+      header: PageHeader(title: Text('哈希散列')),
       content: Padding(
         padding: EdgeInsetsDirectional.only(
           end: PageHeader.horizontalPadding(context),

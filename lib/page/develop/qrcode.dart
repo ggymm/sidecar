@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:file_selector/file_selector.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:path/path.dart';
 import 'package:sidecar/app.dart';
 
@@ -17,14 +16,6 @@ class QrcodeDevelopPage extends StatefulWidget {
 class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
   var qrcode;
   var output = TextEditingController();
-
-  final Widget imageIcon = SvgPicture.asset(
-    'assets/icons/qrcode.svg',
-    width: 180,
-    height: 180,
-    colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-    semanticsLabel: 'Java Icon',
-  );
 
   parseQrcode() async {
     final dir = await App.getBinDir();
@@ -57,7 +48,7 @@ class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
                         children: [
                           Row(
                             children: [
-                              Text('图片'),
+                              Text('文件'),
                               Row(
                                 children: [
                                   SizedBox(
@@ -84,7 +75,7 @@ class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
                           Expanded(
                             child:
                                 qrcode == null
-                                    ? imageIcon
+                                    ? SizedBox()
                                     : Image.file(File(qrcode)),
                           ),
                         ],
