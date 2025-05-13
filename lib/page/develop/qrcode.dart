@@ -19,9 +19,9 @@ class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
   var output = TextEditingController();
 
   final Widget imageIcon = SvgPicture.asset(
-    'assets/icons/image.svg',
-    width: 120,
-    height: 120,
+    'assets/icons/qrcode.svg',
+    width: 180,
+    height: 180,
     colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
     semanticsLabel: 'Java Icon',
   );
