@@ -1,7 +1,6 @@
 name: sidecar
-description: "Sidecar App"
-publish_to: 'none'
 version: 0.1.0
+description: "Sidecar App"
 
 environment:
   sdk: ^3.7.2

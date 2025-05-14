@@ -71,7 +71,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                         children: [
                           Text('输入类型'),
                           SizedBox(
-                            width: 120,
+                            width: 260,
                             child: ComboBox<String>(
                               value: type,
                               items: types,
@@ -82,6 +82,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                                   output.text = ''; // 清空输出框
                                 });
                               },
+                              isExpanded: true,
                             ),
                           ),
                         ],
@@ -101,28 +102,26 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                               Text('输入内容'),
                               Row(
                                 children: [
-                                  Visibility(
-                                    child: SizedBox(
-                                      width: 120,
-                                      height: 34,
-                                      child: Button(
-                                        child: const Text('选择文件'),
-                                        onPressed: () async {
-                                          final XFile? file = await openFile();
-                                          if (file != null) {
-                                            setState(() {
-                                              input.text = file.path;
-                                            });
-                                          }
-                                        },
-                                      ),
+                                  SizedBox(
+                                    width: 120,
+                                    height: 34,
+                                    child: Button(
+                                      child: const Text('选择文件'),
+                                      onPressed:
+                                          type != 'file'
+                                              ? null
+                                              : () async {
+                                                final XFile? file =
+                                                    await openFile();
+                                                if (file != null) {
+                                                  setState(() {
+                                                    input.text = file.path;
+                                                  });
+                                                }
+                                              },
                                     ),
-                                    visible: type == 'file',
                                   ),
-                                  Visibility(
-                                    child: SizedBox(width: 20),
-                                    visible: type == 'file',
-                                  ),
+                                  SizedBox(width: 20),
                                   SizedBox(
                                     width: 120,
                                     height: 34,
