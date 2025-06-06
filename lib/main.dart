@@ -112,7 +112,7 @@ class MainPageState extends State<MainPage> {
               key: const ValueKey('/develop/cert'),
               icon: certIcon,
               body: const SizedBox.shrink(),
-              title: const Text('证书'),
+              title: const Text('证书解析'),
             ),
             PaneItem(
               key: const ValueKey('/develop/hash'),

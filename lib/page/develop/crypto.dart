@@ -11,7 +11,7 @@ class CryptoDevelopPageState extends State<CryptoDevelopPage> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage.scrollable(
-      header: PageHeader(title: Text('加解密工具')),
+      header: PageHeader(title: Text('加解密')),
       children: [Text('CryptoDevelop')],
     );
   }

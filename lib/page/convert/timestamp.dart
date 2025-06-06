@@ -150,7 +150,7 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
   Widget build(BuildContext context) {
     final height = 80.0;
     return ScaffoldPage.scrollable(
-      header: PageHeader(title: Text('时间戳转换工具')),
+      header: PageHeader(title: Text('时间戳')),
       children: [
         SizedBox(
           height: height,

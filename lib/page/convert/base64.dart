@@ -47,7 +47,7 @@ class Base64ConvertPageState extends State<Base64ConvertPage> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
-      header: PageHeader(title: Text('Base64 转换工具')),
+      header: PageHeader(title: Text('Base64')),
       content: Padding(
         padding: EdgeInsetsDirectional.only(
           end: PageHeader.horizontalPadding(context),
