@@ -160,30 +160,32 @@ class MainPageState extends State<MainPage> {
               if (GoRouterState.of(context).uri.toString() != path) {
                 context.go(path);
               }
-              item.onTap?.call();
+              // item.onTap?.call();
             },
           );
         }
 
         if (e is PaneItemExpander) {
+          final List<NavigationPaneItem> items = [];
+          for (var item in e.items) {
+            if (item is PaneItem) {
+              items.add(buildItem(item));
+            } else {
+              items.add(item);
+            }
+          }
           return PaneItemExpander(
             key: e.key,
             icon: e.icon,
             body: e.body,
             title: e.title,
-            items:
-                e.items.map((item) {
-                  if (item is PaneItem) {
-                    return buildItem(item);
-                  }
-                  return item;
-                }).toList(),
+            items: items,
             onTap: () {
               final path = (e.key as ValueKey).value;
               if (GoRouterState.of(context).uri.toString() != path) {
                 context.go(path);
               }
-              e.onTap?.call();
+              // e.onTap?.call();
             },
             initiallyExpanded: true,
           );
@@ -233,9 +235,16 @@ class MainPageState extends State<MainPage> {
   }
 
   int calcSelected(BuildContext context) {
-    return items.indexWhere(
-      (item) => item.key == Key(GoRouterState.of(context).uri.toString()),
-    );
+    for (var i = 0; i < items.length; i++) {
+      final item = items[i];
+      if (item.key == null) {
+        continue;
+      }
+      if (item.key == Key(GoRouterState.of(context).uri.toString())) {
+        return i;
+      }
+    }
+    return 0;
   }
 
   List<PaneItem> buildFlattened(List<NavigationPaneItem> items) {
