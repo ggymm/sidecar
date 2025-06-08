@@ -187,7 +187,7 @@ class MainPageState extends State<MainPage> {
               }
               // e.onTap?.call();
             },
-            initiallyExpanded: true,
+            initiallyExpanded: false,
           );
         }
         if (e is PaneItem) {

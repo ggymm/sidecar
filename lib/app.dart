@@ -18,6 +18,6 @@ class App {
   }
 
   static Future<String> getBinDir() async {
-    return join(await getDir(), "bin");
+    return join(await getDir(), "asset", "bin");
   }
 }
