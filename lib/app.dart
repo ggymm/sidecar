@@ -4,9 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 
 class App {
-  static final hash = "hash";
-  static final qrcode = "qrcode";
-
   static Future<String> getDir() async {
     if (kDebugMode) {
       return Directory.current.path;
@@ -17,7 +14,11 @@ class App {
     }
   }
 
-  static Future<String> getBinDir() async {
-    return join(await getDir(), "asset", "bin");
+  static Future<String> getHashBin() async {
+    return join(await getDir(), "app", "plugins", "hash", "hash");
+  }
+
+  static Future<String> getQrcodeBin() async {
+    return join(await getDir(), "app", "plugins", "qrcode", "qrcode");
   }
 }

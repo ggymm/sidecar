@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:crypto/crypto.dart';
 import 'package:file_selector/file_selector.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:path/path.dart';
 import 'package:sidecar/app.dart';
 
 class HashDevelopPage extends StatefulWidget {
@@ -25,10 +24,8 @@ class HashDevelopPageState extends State<HashDevelopPage> {
   final output = TextEditingController();
 
   hashFile() async {
-    final dir = await App.getBinDir();
-    final result = await Process.run(join(dir, App.hash, App.hash), [
-      input.text,
-    ]);
+    final bin = await App.getHashBin();
+    final result = await Process.run(bin, [input.text]);
     setState(() {
       output.text = result.stdout;
     });

@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:file_selector/file_selector.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:path/path.dart';
 import 'package:sidecar/app.dart';
 
 class QrcodeDevelopPage extends StatefulWidget {
@@ -18,10 +17,8 @@ class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
   var output = TextEditingController();
 
   parseQrcode() async {
-    final dir = await App.getBinDir();
-    final result = await Process.run(join(dir, App.qrcode, App.qrcode), [
-      qrcode,
-    ], stdoutEncoding: utf8);
+    final bin = await App.getQrcodeBin();
+    final result = await Process.run(bin, [qrcode], stdoutEncoding: utf8);
     setState(() {
       output.text = result.stdout;
     });
