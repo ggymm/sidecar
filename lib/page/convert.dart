@@ -14,7 +14,7 @@ class ConvertPageState extends State<ConvertPage> {
   final List<Map<String, dynamic>> items = [
     {
       'icon': SvgPicture.asset(
-        'asset/icons/base64.svg',
+        'asset/icon/base64.svg',
         width: size,
         height: size,
         colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
@@ -25,7 +25,7 @@ class ConvertPageState extends State<ConvertPage> {
     },
     {
       'icon': SvgPicture.asset(
-        'asset/icons/timestamp.svg',
+        'asset/icon/timestamp.svg',
         width: size,
         height: size,
         colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),

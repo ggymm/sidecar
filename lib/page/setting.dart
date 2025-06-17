@@ -11,7 +11,7 @@ class SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage.scrollable(
-      header: PageHeader(title: Text('SettingPage')),
+      header: PageHeader(title: Text('设置')),
       children: [Text('SettingPage')],
     );
   }

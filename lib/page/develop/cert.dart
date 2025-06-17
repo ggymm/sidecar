@@ -21,10 +21,17 @@ class CertDevelopPageState extends State<CertDevelopPage> {
 
     certNode.addListener(() {
       // 解析 x509 证书
-      final text = certCtrl.text;
+      var text = certCtrl.text;
       if (!text.isNotEmpty) {
         return;
       }
+
+      // 如果输入文本包含 字符串的 \n 替换为实际换行符
+      text = text.replaceAll(r'\n', '\n');
+      setState(() {
+        certCtrl.text = text;
+      });
+
       try {
         final cert = parsePem(text).first as X509Certificate;
         setState(() {

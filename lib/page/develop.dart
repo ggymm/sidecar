@@ -14,7 +14,7 @@ class DevelopPageState extends State<DevelopPage> {
   final List<Map<String, dynamic>> items = [
     {
       'icon': SvgPicture.asset(
-        'asset/icons/cert.svg',
+        'asset/icon/cert.svg',
         width: size,
         height: size,
         colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
@@ -25,7 +25,7 @@ class DevelopPageState extends State<DevelopPage> {
     },
     {
       'icon': SvgPicture.asset(
-        'asset/icons/hash.svg',
+        'asset/icon/hash.svg',
         width: size,
         height: size,
         colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
@@ -36,7 +36,7 @@ class DevelopPageState extends State<DevelopPage> {
     },
     {
       'icon': SvgPicture.asset(
-        'asset/icons/crypto.svg',
+        'asset/icon/crypto.svg',
         width: size,
         height: size,
         colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
@@ -47,7 +47,7 @@ class DevelopPageState extends State<DevelopPage> {
     },
     {
       'icon': SvgPicture.asset(
-        'asset/icons/qrcode.svg',
+        'asset/icon/qrcode.svg',
         width: size,
         height: size,
         colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),

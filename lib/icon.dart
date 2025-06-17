@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 const size = 20.0;
 
 final Widget homeIcon = SvgPicture.asset(
-  'asset/icons/home.svg',
+  'asset/icon/home.svg',
   width: 18.0,
   height: 18.0,
   colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
@@ -12,7 +12,7 @@ final Widget homeIcon = SvgPicture.asset(
 );
 
 final Widget appsIcon = SvgPicture.asset(
-  'asset/icons/apps.svg',
+  'asset/icon/apps.svg',
   width: size,
   height: size,
   colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
@@ -21,7 +21,7 @@ final Widget appsIcon = SvgPicture.asset(
 
 /// ========== 转换工具 ==========
 final Widget base64Icon = SvgPicture.asset(
-  'asset/icons/base64.svg',
+  'asset/icon/base64.svg',
   width: size,
   height: size,
   colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
@@ -29,7 +29,7 @@ final Widget base64Icon = SvgPicture.asset(
 );
 
 final Widget timestampIcon = SvgPicture.asset(
-  'asset/icons/timestamp.svg',
+  'asset/icon/timestamp.svg',
   width: size,
   height: size,
   colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
@@ -38,7 +38,7 @@ final Widget timestampIcon = SvgPicture.asset(
 
 /// ========== 开发工具 ==========
 final Widget certIcon = SvgPicture.asset(
-  'asset/icons/cert.svg',
+  'asset/icon/cert.svg',
   width: size,
   height: size,
   colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
@@ -46,7 +46,7 @@ final Widget certIcon = SvgPicture.asset(
 );
 
 final Widget hashIcon = SvgPicture.asset(
-  'asset/icons/hash.svg',
+  'asset/icon/hash.svg',
   width: size,
   height: size,
   colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
@@ -54,7 +54,7 @@ final Widget hashIcon = SvgPicture.asset(
 );
 
 final Widget cryptoIcon = SvgPicture.asset(
-  'asset/icons/crypto.svg',
+  'asset/icon/crypto.svg',
   width: size,
   height: size,
   colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
@@ -62,7 +62,7 @@ final Widget cryptoIcon = SvgPicture.asset(
 );
 
 final Widget qrcodeIcon = SvgPicture.asset(
-  'asset/icons/qrcode.svg',
+  'asset/icon/qrcode.svg',
   width: size,
   height: size,
   colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
@@ -71,7 +71,7 @@ final Widget qrcodeIcon = SvgPicture.asset(
 
 /// ========== 代码片段 ==========
 final Widget javaIcon = SvgPicture.asset(
-  'asset/icons/java.svg',
+  'asset/icon/java.svg',
   width: size,
   height: size,
   colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
