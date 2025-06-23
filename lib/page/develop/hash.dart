@@ -62,13 +62,11 @@ class HashDevelopPageState extends State<HashDevelopPage> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 80,
                     child: Card(
                       child: Row(
                         children: [
                           Text('输入类型'),
                           SizedBox(
-                            width: 260,
                             child: ComboBox<String>(
                               value: type,
                               items: types,
@@ -81,6 +79,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                               },
                               isExpanded: true,
                             ),
+                            width: 260,
                           ),
                         ],
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,6 +87,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                       padding: EdgeInsets.all(20),
                       borderRadius: BorderRadius.circular(10),
                     ),
+                    height: 80,
                   ),
                   SizedBox(height: 20),
                   Expanded(
@@ -100,8 +100,6 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                               Row(
                                 children: [
                                   SizedBox(
-                                    width: 120,
-                                    height: 34,
                                     child: Button(
                                       child: const Text('选择文件'),
                                       onPressed:
@@ -117,11 +115,11 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                                                 }
                                               },
                                     ),
+                                    width: 120,
+                                    height: 34,
                                   ),
                                   SizedBox(width: 20),
                                   SizedBox(
-                                    width: 120,
-                                    height: 34,
                                     child: Button(
                                       child: const Text('计算 Hash'),
                                       onPressed: () async {
@@ -135,13 +133,15 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                                         await hashText();
                                       },
                                     ),
+                                    width: 120,
+                                    height: 34,
                                   ),
                                 ],
                               ),
                             ],
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(height: 16),
                           Expanded(
                             child: TextBox(
                               maxLines: null,
@@ -164,7 +164,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                             children: [Text('输出结果')],
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(height: 16),
                           Expanded(
                             child: TextBox(
                               maxLines: null,

@@ -20,18 +20,34 @@ class Base64ConvertPageState extends State<Base64ConvertPage> {
 
     originNode.addListener(() {
       setState(() {
+        encodeCtrl.text = '';
         final text = originCtrl.text;
         if (text.isNotEmpty) {
-          encodeCtrl.text = base64Encode(utf8.encode(text));
+          try {
+            final encode = base64Encode(utf8.encode(text));
+            if (encode.isNotEmpty) {
+              encodeCtrl.text = encode;
+            }
+          } catch (e) {
+            encodeCtrl.text = '编码失败: $e';
+          }
         }
       });
     });
 
     encodeNode.addListener(() {
       setState(() {
+        originCtrl.text = '';
         final text = encodeCtrl.text;
         if (text.isNotEmpty) {
-          originCtrl.text = utf8.decode(base64Decode(text));
+          try {
+            final decode = base64Decode(text);
+            if (decode.isNotEmpty) {
+              originCtrl.text = utf8.decode(decode);
+            }
+          } catch (e) {
+            originCtrl.text = '解码失败: $e';
+          }
         }
       });
     });
@@ -64,12 +80,10 @@ class Base64ConvertPageState extends State<Base64ConvertPage> {
                       child: Column(
                         children: [
                           Align(
-                            child: Padding(
-                              child: Text('原始内容'),
-                              padding: EdgeInsets.only(left: 8, bottom: 12),
-                            ),
+                            child: Text('原始内容'),
                             alignment: Alignment.centerLeft,
                           ),
+                          SizedBox(height: 16),
                           Expanded(
                             child: TextBox(
                               minLines: 1,
@@ -90,12 +104,10 @@ class Base64ConvertPageState extends State<Base64ConvertPage> {
                       child: Column(
                         children: [
                           Align(
-                            child: Padding(
-                              child: Text('编码内容'),
-                              padding: EdgeInsets.only(left: 8, bottom: 12),
-                            ),
+                            child: Text('编码内容'),
                             alignment: Alignment.centerLeft,
                           ),
+                          SizedBox(height: 16),
                           Expanded(
                             child: TextBox(
                               minLines: 1,

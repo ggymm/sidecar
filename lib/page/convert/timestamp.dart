@@ -153,7 +153,6 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
       header: PageHeader(title: Text('时间戳')),
       children: [
         SizedBox(
-          height: height,
           child: Card(
             child: Row(
               children: [
@@ -161,7 +160,6 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
                 Row(
                   children: [
                     SizedBox(
-                      width: 240,
                       child: NumberBox(
                         mode: SpinButtonPlacementMode.inline,
                         value: input,
@@ -174,10 +172,10 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
                           });
                         },
                       ),
+                      width: 240,
                     ),
                     SizedBox(width: 20),
                     SizedBox(
-                      width: 100,
                       child: ComboBox<int>(
                         value: unit,
                         items: units,
@@ -201,11 +199,10 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
                         },
                         isExpanded: true,
                       ),
+                      width: 100,
                     ),
                     SizedBox(width: 20),
                     SizedBox(
-                      width: 100,
-                      height: 34,
                       child: Button(
                         child: const Text('当前时间'),
                         onPressed: () {
@@ -218,6 +215,8 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
                           });
                         },
                       ),
+                      width: 100,
+                      height: 34,
                     ),
                   ],
                 ),
@@ -227,16 +226,15 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
             padding: EdgeInsets.all(20),
             borderRadius: BorderRadius.circular(10),
           ),
+          height: height,
         ),
         SizedBox(height: 20),
         SizedBox(
-          height: height,
           child: Card(
             child: Row(
               children: [
                 Text('时区选择'),
                 SizedBox(
-                  width: 480,
                   child: ComboBox<double>(
                     value: timezone,
                     items: timezones,
@@ -247,6 +245,7 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
                     },
                     isExpanded: true,
                   ),
+                  width: 480,
                 ),
               ],
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -254,10 +253,10 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
             padding: EdgeInsets.all(20),
             borderRadius: BorderRadius.circular(10),
           ),
+          height: height,
         ),
         SizedBox(height: 20),
         SizedBox(
-          height: height,
           child: Card(
             child: Row(
               children: [Text('Common'), Text(common)],
@@ -266,10 +265,10 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
             padding: EdgeInsets.all(20),
             borderRadius: BorderRadius.circular(10),
           ),
+          height: height,
         ),
         SizedBox(height: 20),
         SizedBox(
-          height: height,
           child: Card(
             child: Row(
               children: [Text('ISO 8601'), Text(iso8601)],
@@ -278,10 +277,10 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
             padding: EdgeInsets.all(20),
             borderRadius: BorderRadius.circular(10),
           ),
+          height: height,
         ),
         SizedBox(height: 20),
         SizedBox(
-          height: height,
           child: Card(
             child: Row(
               children: [Text('RFC 7231'), Text(rfc7231)],
@@ -290,6 +289,7 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
             padding: EdgeInsets.all(20),
             borderRadius: BorderRadius.circular(10),
           ),
+          height: height,
         ),
       ],
     );

@@ -77,3 +77,11 @@ final Widget javaIcon = SvgPicture.asset(
   colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
   semanticsLabel: 'Java Icon',
 );
+
+final Widget manualIcon = SvgPicture.asset(
+  'asset/icon/manual.svg',
+  width: size,
+  height: size,
+  colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+  semanticsLabel: 'Manual Icon',
+);

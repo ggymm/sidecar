@@ -49,8 +49,6 @@ class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
                               Row(
                                 children: [
                                   SizedBox(
-                                    width: 120,
-                                    height: 34,
                                     child: Button(
                                       child: const Text('选择文件'),
                                       onPressed: () async {
@@ -63,6 +61,8 @@ class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
                                         }
                                       },
                                     ),
+                                    width: 120,
+                                    height: 34,
                                   ),
                                 ],
                               ),
@@ -83,7 +83,6 @@ class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
                   ),
                   SizedBox(height: 20),
                   SizedBox(
-                    height: 240,
                     child: Card(
                       child: Column(
                         children: [
@@ -91,7 +90,7 @@ class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
                             children: [Text('解析结果')],
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(height: 16),
                           Expanded(
                             child: TextBox(
                               maxLines: null,
@@ -105,6 +104,7 @@ class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
                       padding: EdgeInsets.all(20),
                       borderRadius: BorderRadius.circular(10),
                     ),
+                    height: 240,
                   ),
                 ],
               ),

@@ -71,12 +71,10 @@ class CertDevelopPageState extends State<CertDevelopPage> {
                       child: Column(
                         children: [
                           Align(
-                            child: Padding(
-                              child: Text('证书'),
-                              padding: EdgeInsets.only(left: 8, bottom: 12),
-                            ),
+                            child: Text('证书'),
                             alignment: Alignment.centerLeft,
                           ),
+                          SizedBox(height: 16),
                           Expanded(
                             child: TextBox(
                               minLines: 1,
@@ -98,12 +96,10 @@ class CertDevelopPageState extends State<CertDevelopPage> {
                       child: Column(
                         children: [
                           Align(
-                            child: Padding(
-                              child: Text('解析结果'),
-                              padding: EdgeInsets.only(left: 8, bottom: 12),
-                            ),
+                            child: Text('解析结果'),
                             alignment: Alignment.centerLeft,
                           ),
+                          SizedBox(height: 16),
                           Expanded(
                             child: TextBox(
                               minLines: 1,

@@ -17,11 +17,10 @@ void main() async {
   windowManager.waitUntilReadyToShow(
     WindowOptions(
       size: Size(1280, 800),
-      center: true,
       minimumSize: Size(1280, 800),
-      backgroundColor: Colors.transparent,
       skipTaskbar: false,
       titleBarStyle: TitleBarStyle.hidden,
+      backgroundColor: Colors.transparent,
     ),
     () async {
       await windowManager.show();
@@ -146,6 +145,12 @@ class MainPageState extends State<MainPage> {
               body: const SizedBox.shrink(),
               title: const Text('Java'),
             ),
+            PaneItem(
+              key: const ValueKey('/snippet/manual'),
+              icon: manualIcon,
+              body: const SizedBox.shrink(),
+              title: const Text('命令手册'),
+            ),
           ],
         ),
       ].map<NavigationPaneItem>((e) {
@@ -187,7 +192,7 @@ class MainPageState extends State<MainPage> {
               }
               // e.onTap?.call();
             },
-            initiallyExpanded: false,
+            initiallyExpanded: true,
           );
         }
         if (e is PaneItem) {
@@ -325,12 +330,12 @@ class MainWindowCaption extends StatelessWidget {
     final FluentThemeData theme = FluentTheme.of(context);
 
     return SizedBox(
-      width: 138,
-      height: appBarHeight,
       child: WindowCaption(
         brightness: theme.brightness,
         backgroundColor: Colors.transparent,
       ),
+      width: 138,
+      height: appBarHeight,
     );
   }
 }
@@ -395,6 +400,10 @@ final router = GoRouter(
         GoRoute(
           path: '/snippet/java',
           builder: (context, state) => JavaSnippetPage(),
+        ),
+        GoRoute(
+          path: '/snippet/manual',
+          builder: (context, state) => ManualSnippetPage(),
         ),
       ],
     ),
