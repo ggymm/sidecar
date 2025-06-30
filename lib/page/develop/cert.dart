@@ -88,7 +88,7 @@ class CertDevelopPageState extends State<CertDevelopPage> {
                       padding: EdgeInsets.all(20),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    height: 200,
+                    height: 240,
                   ),
                   SizedBox(height: 20),
                   Expanded(

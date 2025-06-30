@@ -48,7 +48,7 @@ class ManualSnippetPageState extends State<ManualSnippetPage> {
     }
 
     // 使用 notepad 打开文件
-    await Process.run('notepad4', [file.path]);
+    await Process.run('notepad', [file.path]);
   }
 
   @override

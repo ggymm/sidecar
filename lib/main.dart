@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sidecar/app.dart';
 import 'package:sidecar/icon.dart';
 import 'package:sidecar/page/app.dart';
 import 'package:sidecar/page/setting.dart';
@@ -11,6 +14,15 @@ import 'package:window_manager/window_manager.dart';
 const double appBarHeight = 48.0;
 
 void main() async {
+  print(Platform.operatingSystem);
+  print(Platform.operatingSystemVersion);
+  print(Platform.localHostname);
+  print(Platform.version);
+  print(Platform.environment['PROCESSOR_ARCHITECTURE']);
+  print(Platform.environment['PROCESSOR_ARCHITEW6432']);
+  print(Platform.environment['HOSTTYPE']);
+
+  App.init();
   WidgetsFlutterBinding.ensureInitialized();
 
   await windowManager.ensureInitialized();
