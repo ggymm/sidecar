@@ -21,4 +21,12 @@ class App {
   static Future<String> getQrcodeBin() async {
     return join(await getDir(), "app", "plugins", "qrcode", "qrcode");
   }
+
+  static Future<String> getManualRoot() async {
+    return join(await getDir(), "app", "snippets", "manual");
+  }
+
+  static Future<String> getManualIndex() async {
+    return join(await getDir(), "app", "snippets", "manual", "index.json");
+  }
 }
