@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sidecar/app.dart';
@@ -14,14 +12,6 @@ import 'package:window_manager/window_manager.dart';
 const double appBarHeight = 48.0;
 
 void main() async {
-  print(Platform.operatingSystem);
-  print(Platform.operatingSystemVersion);
-  print(Platform.localHostname);
-  print(Platform.version);
-  print(Platform.environment['PROCESSOR_ARCHITECTURE']);
-  print(Platform.environment['PROCESSOR_ARCHITEW6432']);
-  print(Platform.environment['HOSTTYPE']);
-
   App.init();
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -152,10 +142,10 @@ class MainPageState extends State<MainPage> {
           title: const Text('代码片段'),
           items: [
             PaneItem(
-              key: const ValueKey('/snippet/java'),
-              icon: javaIcon,
+              key: const ValueKey('/snippet/code'),
+              icon: codeIcon,
               body: const SizedBox.shrink(),
-              title: const Text('Java'),
+              title: const Text('代码库'),
             ),
             PaneItem(
               key: const ValueKey('/snippet/manual'),
@@ -410,8 +400,8 @@ final router = GoRouter(
           builder: (context, state) => SnippetPage(),
         ),
         GoRoute(
-          path: '/snippet/java',
-          builder: (context, state) => JavaSnippetPage(),
+          path: '/snippet/code',
+          builder: (context, state) => CodeSnippetPage(),
         ),
         GoRoute(
           path: '/snippet/manual',

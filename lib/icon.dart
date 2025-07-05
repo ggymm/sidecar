@@ -70,12 +70,12 @@ final Widget qrcodeIcon = SvgPicture.asset(
 );
 
 /// ========== 代码片段 ==========
-final Widget javaIcon = SvgPicture.asset(
-  'asset/icon/java.svg',
+final Widget codeIcon = SvgPicture.asset(
+  'asset/icon/code.svg',
   width: size,
   height: size,
   colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-  semanticsLabel: 'Java Icon',
+  semanticsLabel: 'Code Icon',
 );
 
 final Widget manualIcon = SvgPicture.asset(

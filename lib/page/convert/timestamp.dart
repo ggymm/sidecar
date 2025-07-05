@@ -71,6 +71,9 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
   late var rfc7231 = '';
 
   void runFormat() {
+    if (input == null) {
+      return;
+    }
     int millisecond = input;
     if (unit == 1) {
       millisecond = millisecond * 1000;
@@ -165,7 +168,10 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
                         value: input,
                         onChanged: (int? v) {
                           setState(() {
-                            input = v!;
+                            if (v == null) {
+                              return;
+                            }
+                            input = v;
 
                             // 运行格式化方法
                             runFormat();
@@ -181,7 +187,10 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
                         items: units,
                         onChanged: (v) {
                           setState(() {
-                            unit = v!;
+                            if (v == null) {
+                              return;
+                            }
+                            unit = v;
 
                             // 修改 input
                             switch (unit) {
