@@ -24,43 +24,45 @@ class ApkDevelopPageState extends State<ApkDevelopPage> {
               child: Column(
                 children: [
                   SizedBox(
+                    height: 80,
                     child: Card(
+                      padding: EdgeInsets.all(20),
+                      borderRadius: BorderRadius.circular(10),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text('文件路径'),
                           Row(
                             children: [
                               SizedBox(
-                                child: TextBox(maxLines: null),
                                 width: 260,
+                                child: TextBox(maxLines: null),
                               ),
                               SizedBox(width: 20),
                               SizedBox(
+                                width: 120,
+                                height: 34,
                                 child: Button(
                                   child: const Text('计算 Hash'),
                                   onPressed: () async {},
                                 ),
-                                width: 120,
-                                height: 34,
                               ),
                             ],
                           ),
                         ],
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       ),
-                      padding: EdgeInsets.all(20),
-                      borderRadius: BorderRadius.circular(10),
                     ),
-                    height: 80,
                   ),
                   SizedBox(height: 20),
                   Expanded(
                     child: Card(
+                      padding: EdgeInsets.all(20),
+                      borderRadius: BorderRadius.circular(10),
                       child: Column(
                         children: [
                           Align(
-                            child: Text('解析结果'),
                             alignment: Alignment.centerLeft,
+                            child: Text('解析结果'),
                           ),
                           SizedBox(height: 16),
                           Expanded(
@@ -72,8 +74,6 @@ class ApkDevelopPageState extends State<ApkDevelopPage> {
                           ),
                         ],
                       ),
-                      padding: EdgeInsets.all(20),
-                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ],

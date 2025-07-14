@@ -61,7 +61,6 @@ class DevelopPageState extends State<DevelopPage> {
 
   void handleItemTap(int index) {
     final path = items[index]['path'];
-    print(path);
     if (GoRouterState.of(context).uri.toString() != path) {
       context.go(path);
     }

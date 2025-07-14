@@ -16,14 +16,14 @@ class HashDevelopPage extends StatefulWidget {
 class HashDevelopPageState extends State<HashDevelopPage> {
   var type = 'text';
   final types = <ComboBoxItem<String>>[
-    ComboBoxItem<String>(child: Text('文本类型'), value: 'text'),
-    ComboBoxItem<String>(child: Text('文件类型'), value: 'file'),
+    ComboBoxItem<String>(value: 'text', child: Text('文本类型')),
+    ComboBoxItem<String>(value: 'file', child: Text('文件类型')),
   ];
 
   final input = TextEditingController();
   final output = TextEditingController();
 
-  hashFile() async {
+  void hashFile() async {
     final bin = await App.getHashBin();
     final result = await Process.run(bin, [input.text]);
     setState(() {
@@ -31,7 +31,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
     });
   }
 
-  hashText() async {
+  void hashText() async {
     final bytes = utf8.encode(input.text);
     final md5Hash = md5.convert(bytes).toString();
     final sha1Hash = sha1.convert(bytes).toString();
@@ -62,11 +62,16 @@ class HashDevelopPageState extends State<HashDevelopPage> {
               child: Column(
                 children: [
                   SizedBox(
+                    height: 80,
                     child: Card(
+                      padding: EdgeInsets.all(20),
+                      borderRadius: BorderRadius.circular(10),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text('输入类型'),
                           SizedBox(
+                            width: 260,
                             child: ComboBox<String>(
                               value: type,
                               items: types,
@@ -79,29 +84,28 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                               },
                               isExpanded: true,
                             ),
-                            width: 260,
                           ),
                         ],
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       ),
-                      padding: EdgeInsets.all(20),
-                      borderRadius: BorderRadius.circular(10),
                     ),
-                    height: 80,
                   ),
                   SizedBox(height: 20),
                   Expanded(
                     child: Card(
+                      padding: EdgeInsets.all(20),
+                      borderRadius: BorderRadius.circular(10),
                       child: Column(
                         children: [
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('输入内容'),
                               Row(
                                 children: [
                                   SizedBox(
+                                    width: 120,
+                                    height: 34,
                                     child: Button(
-                                      child: const Text('选择文件'),
                                       onPressed:
                                           type != 'file'
                                               ? null
@@ -114,12 +118,13 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                                                   });
                                                 }
                                               },
+                                      child: const Text('选择文件'),
                                     ),
-                                    width: 120,
-                                    height: 34,
                                   ),
                                   SizedBox(width: 20),
                                   SizedBox(
+                                    width: 120,
+                                    height: 34,
                                     child: Button(
                                       child: const Text('计算 Hash'),
                                       onPressed: () async {
@@ -127,19 +132,16 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                                           return;
                                         }
                                         if (type == 'file') {
-                                          await hashFile();
+                                          hashFile();
                                           return;
                                         }
-                                        await hashText();
+                                        hashText();
                                       },
                                     ),
-                                    width: 120,
-                                    height: 34,
                                   ),
                                 ],
                               ),
                             ],
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           ),
                           SizedBox(height: 16),
                           Expanded(
@@ -151,18 +153,18 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                           ),
                         ],
                       ),
-                      padding: EdgeInsets.all(20),
-                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   SizedBox(height: 20),
                   Expanded(
                     child: Card(
+                      padding: EdgeInsets.all(20),
+                      borderRadius: BorderRadius.circular(10),
                       child: Column(
                         children: [
                           Row(
-                            children: [Text('输出结果')],
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [Text('输出结果')],
                           ),
                           SizedBox(height: 16),
                           Expanded(
@@ -175,8 +177,6 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                           ),
                         ],
                       ),
-                      padding: EdgeInsets.all(20),
-                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ],

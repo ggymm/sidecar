@@ -129,9 +129,15 @@ class MainPageState extends State<MainPage> {
             ),
             PaneItem(
               key: const ValueKey('/develop/qrcode'),
-              icon: certIcon,
+              icon: qrcodeIcon,
               body: const SizedBox.shrink(),
               title: const Text('二维码'),
+            ),
+            PaneItem(
+              key: const ValueKey('/develop/random'),
+              icon: randomIcon,
+              body: const SizedBox.shrink(),
+              title: const Text('模拟数据'),
             ),
           ],
         ),
@@ -332,25 +338,23 @@ class MainWindowCaption extends StatelessWidget {
     final FluentThemeData theme = FluentTheme.of(context);
 
     return SizedBox(
+      width: 138,
+      height: appBarHeight,
       child: WindowCaption(
         brightness: theme.brightness,
         backgroundColor: Colors.transparent,
       ),
-      width: 138,
-      height: appBarHeight,
     );
   }
 }
 
-final rootNavigatorKey = GlobalKey<NavigatorState>();
-final shellNavigatorKey = GlobalKey<NavigatorState>();
 final router = GoRouter(
   routes: [
     ShellRoute(
       builder: (context, state, child) {
         return MainPage(
-          child: child,
           shellContext: shellNavigatorKey.currentContext,
+          child: child,
         );
       },
       routes: <GoRoute>[
@@ -393,6 +397,10 @@ final router = GoRouter(
           path: '/develop/qrcode',
           builder: (context, state) => QrcodeDevelopPage(),
         ),
+        GoRoute(
+          path: '/develop/random',
+          builder: (context, state) => RandomDevelopPage(),
+        ),
 
         // 代码片段
         GoRoute(
@@ -411,3 +419,5 @@ final router = GoRouter(
     ),
   ],
 );
+final rootNavigatorKey = GlobalKey<NavigatorState>();
+final shellNavigatorKey = GlobalKey<NavigatorState>();

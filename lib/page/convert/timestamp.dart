@@ -10,43 +10,43 @@ class TimestampConvertPage extends StatefulWidget {
 class TimestampConvertPageState extends State<TimestampConvertPage> {
   var unit = 1;
   final units = <ComboBoxItem<int>>[
-    ComboBoxItem<int>(child: Text('秒'), value: 1),
-    ComboBoxItem<int>(child: Text('毫秒'), value: 1000),
+    ComboBoxItem<int>(value: 1, child: Text('秒')),
+    ComboBoxItem<int>(value: 1000, child: Text('毫秒')),
   ];
 
   var timezone = 8.0;
   final timezones = <ComboBoxItem<double>>[
-    ComboBoxItem<double>(child: Text('(UTC-12:00) 国际日期变更线西'), value: -12.0),
-    ComboBoxItem<double>(child: Text('(UTC-11:00) 萨摩亚标准时间'), value: -11.0),
-    ComboBoxItem<double>(child: Text('(UTC-10:00) 夏威夷-阿留申标准时间'), value: -10.0),
-    ComboBoxItem<double>(child: Text('(UTC-09:00) 阿拉斯加标准时间'), value: -9.0),
-    ComboBoxItem<double>(child: Text('(UTC-08:00) 北美太平洋标准时间'), value: -8.0),
-    ComboBoxItem<double>(child: Text('(UTC-07:00) 北美山地标准时间'), value: -7.0),
-    ComboBoxItem<double>(child: Text('(UTC-06:00) 北美中部标准时间'), value: -6.0),
-    ComboBoxItem<double>(child: Text('(UTC-05:00) 北美东部标准时间'), value: -5.0),
-    ComboBoxItem<double>(child: Text('(UTC-04:00) 大西洋标准时间'), value: -4.0),
-    ComboBoxItem<double>(child: Text('(UTC-03:00) 阿根廷标准时间'), value: -3.0),
-    ComboBoxItem<double>(child: Text('(UTC-02:00) 中大西洋标准时间'), value: -2.0),
-    ComboBoxItem<double>(child: Text('(UTC-01:00) 亚速尔标准时间'), value: -1.0),
-    ComboBoxItem<double>(child: Text('(UTC±00:00) 格林尼治标准时间'), value: 0.0),
-    ComboBoxItem<double>(child: Text('(UTC+01:00) 中欧标准时间'), value: 1.0),
-    ComboBoxItem<double>(child: Text('(UTC+02:00) 东欧标准时间'), value: 2.0),
-    ComboBoxItem<double>(child: Text('(UTC+03:00) 莫斯科标准时间'), value: 3.0),
-    ComboBoxItem<double>(child: Text('(UTC+04:00) 海湾标准时间'), value: 4.0),
-    ComboBoxItem<double>(child: Text('(UTC+05:00) 巴基斯坦标准时间'), value: 5.0),
-    ComboBoxItem<double>(child: Text('(UTC+05:30) 印度标准时间'), value: 5.5),
-    ComboBoxItem<double>(child: Text('(UTC+05:45) 尼泊尔标准时间'), value: 5.75),
-    ComboBoxItem<double>(child: Text('(UTC+06:00) 孟加拉标准时间'), value: 6.0),
-    ComboBoxItem<double>(child: Text('(UTC+06:30) 缅甸标准时间'), value: 6.5),
-    ComboBoxItem<double>(child: Text('(UTC+07:00) 中南半岛标准时间'), value: 7.0),
-    ComboBoxItem<double>(child: Text('(UTC+08:00) 中国标准时间'), value: 8.0),
-    ComboBoxItem<double>(child: Text('(UTC+09:00) 日本标准时间'), value: 9.0),
-    ComboBoxItem<double>(child: Text('(UTC+09:30) 澳大利亚中部标准时间'), value: 9.5),
-    ComboBoxItem<double>(child: Text('(UTC+10:00) 澳大利亚东部标准时间'), value: 10.0),
-    ComboBoxItem<double>(child: Text('(UTC+11:00) 所罗门群岛标准时间'), value: 11.0),
-    ComboBoxItem<double>(child: Text('(UTC+12:00) 新西兰标准时间'), value: 12.0),
-    ComboBoxItem<double>(child: Text('(UTC+13:00) 汤加标准时间'), value: 13.0),
-    ComboBoxItem<double>(child: Text('(UTC+14:00) 莱恩群岛标准时间'), value: 14.0),
+    ComboBoxItem<double>(value: -12.0, child: Text('(UTC-12:00) 国际日期变更线西')),
+    ComboBoxItem<double>(value: -11.0, child: Text('(UTC-11:00) 萨摩亚标准时间')),
+    ComboBoxItem<double>(value: -10.0, child: Text('(UTC-10:00) 夏威夷-阿留申标准时间')),
+    ComboBoxItem<double>(value: -9.0, child: Text('(UTC-09:00) 阿拉斯加标准时间')),
+    ComboBoxItem<double>(value: -8.0, child: Text('(UTC-08:00) 北美太平洋标准时间')),
+    ComboBoxItem<double>(value: -7.0, child: Text('(UTC-07:00) 北美山地标准时间')),
+    ComboBoxItem<double>(value: -6.0, child: Text('(UTC-06:00) 北美中部标准时间')),
+    ComboBoxItem<double>(value: -5.0, child: Text('(UTC-05:00) 北美东部标准时间')),
+    ComboBoxItem<double>(value: -4.0, child: Text('(UTC-04:00) 大西洋标准时间')),
+    ComboBoxItem<double>(value: -3.0, child: Text('(UTC-03:00) 阿根廷标准时间')),
+    ComboBoxItem<double>(value: -2.0, child: Text('(UTC-02:00) 中大西洋标准时间')),
+    ComboBoxItem<double>(value: -1.0, child: Text('(UTC-01:00) 亚速尔标准时间')),
+    ComboBoxItem<double>(value: 0.0, child: Text('(UTC±00:00) 格林尼治标准时间')),
+    ComboBoxItem<double>(value: 1.0, child: Text('(UTC+01:00) 中欧标准时间')),
+    ComboBoxItem<double>(value: 2.0, child: Text('(UTC+02:00) 东欧标准时间')),
+    ComboBoxItem<double>(value: 3.0, child: Text('(UTC+03:00) 莫斯科标准时间')),
+    ComboBoxItem<double>(value: 4.0, child: Text('(UTC+04:00) 海湾标准时间')),
+    ComboBoxItem<double>(value: 5.0, child: Text('(UTC+05:00) 巴基斯坦标准时间')),
+    ComboBoxItem<double>(value: 5.5, child: Text('(UTC+05:30) 印度标准时间')),
+    ComboBoxItem<double>(value: 5.75, child: Text('(UTC+05:45) 尼泊尔标准时间')),
+    ComboBoxItem<double>(value: 6.0, child: Text('(UTC+06:00) 孟加拉标准时间')),
+    ComboBoxItem<double>(value: 6.5, child: Text('(UTC+06:30) 缅甸标准时间')),
+    ComboBoxItem<double>(value: 7.0, child: Text('(UTC+07:00) 中南半岛标准时间')),
+    ComboBoxItem<double>(value: 8.0, child: Text('(UTC+08:00) 中国标准时间')),
+    ComboBoxItem<double>(value: 9.0, child: Text('(UTC+09:00) 日本标准时间')),
+    ComboBoxItem<double>(value: 9.5, child: Text('(UTC+09:30) 澳大利亚中部标准时间')),
+    ComboBoxItem<double>(value: 10.0, child: Text('(UTC+10:00) 澳大利亚东部标准时间')),
+    ComboBoxItem<double>(value: 11.0, child: Text('(UTC+11:00) 所罗门群岛标准时间')),
+    ComboBoxItem<double>(value: 12.0, child: Text('(UTC+12:00) 新西兰标准时间')),
+    ComboBoxItem<double>(value: 13.0, child: Text('(UTC+13:00) 汤加标准时间')),
+    ComboBoxItem<double>(value: 14.0, child: Text('(UTC+14:00) 莱恩群岛标准时间')),
   ];
 
   late final months = [
@@ -65,16 +65,13 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
   ];
   late final weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-  var input;
+  num input = 0;
   late var common = '';
   late var iso8601 = '';
   late var rfc7231 = '';
 
   void runFormat() {
-    if (input == null) {
-      return;
-    }
-    int millisecond = input;
+    int millisecond = input.toInt();
     if (unit == 1) {
       millisecond = millisecond * 1000;
     }
@@ -98,8 +95,7 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
     // Wed, 02 Jan 2000 04:05:06 GMT
     month = months[time.month - 1];
     weekday = weekdays[time.weekday - 1];
-    rfc7231 =
-        "${weekday}, ${day} ${month} ${year} ${hour}:${minute}:${second} GMT";
+    rfc7231 = "$weekday, $day $month $year $hour:$minute:$second GMT";
 
     // 时区转换
     time = time.add(Duration(minutes: (timezone * 60).round()));
@@ -115,15 +111,13 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
     var zone = formatTimezone(timezone);
     switch (unit) {
       case 1:
-        common = "${year}-${month}-${day} ${hour}:${minute}:${second}";
-        iso8601 = "${year}-${month}-${day}T${hour}:${minute}:${second}${zone}";
+        common = "$year-$month-$day $hour:$minute:$second";
+        iso8601 = "$year-$month-$day\\T$hour:$minute:$second$zone";
         break;
       case 1000:
         String millisecond = time.millisecond.toString().padLeft(3, '0');
-        common =
-            "${year}-${month}-${day} ${hour}:${minute}:${second}.${millisecond}";
-        iso8601 =
-            "${year}-${month}-${day}T${hour}:${minute}:${second}.${millisecond}${zone}";
+        common = "$year-$month-$day $hour:$minute:$second.$millisecond";
+        iso8601 = "$year-$month-$day\\T$hour:$minute:$second.$millisecond$zone";
         break;
     }
   }
@@ -133,14 +127,14 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
     final hours = timezone.abs();
     final offsetHour = hours.floor().toString().padLeft(2, '0');
     final offsetMinute = ((hours % 1) * 60).round().toString().padLeft(2, '0');
-    return sign + offsetHour + ':' + offsetMinute;
+    return "$sign$offsetHour:$offsetMinute";
   }
 
   @override
   void initState() {
     super.initState();
 
-    if (input == null) {
+    if (input == 0) {
       // 初始化显示
       DateTime time = DateTime.now().toUtc();
       unit = 1000;
@@ -156,17 +150,22 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
       header: PageHeader(title: Text('时间戳')),
       children: [
         SizedBox(
+          height: height,
           child: Card(
+            padding: EdgeInsets.all(20),
+            borderRadius: BorderRadius.circular(10),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('时间戳'),
                 Row(
                   children: [
                     SizedBox(
-                      child: NumberBox(
+                      width: 240,
+                      child: NumberBox<num>(
                         mode: SpinButtonPlacementMode.inline,
                         value: input,
-                        onChanged: (int? v) {
+                        onChanged: (num? v) {
                           setState(() {
                             if (v == null) {
                               return;
@@ -178,10 +177,10 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
                           });
                         },
                       ),
-                      width: 240,
                     ),
                     SizedBox(width: 20),
                     SizedBox(
+                      width: 100,
                       child: ComboBox<int>(
                         value: unit,
                         items: units,
@@ -208,10 +207,11 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
                         },
                         isExpanded: true,
                       ),
-                      width: 100,
                     ),
                     SizedBox(width: 20),
                     SizedBox(
+                      width: 100,
+                      height: 34,
                       child: Button(
                         child: const Text('当前时间'),
                         onPressed: () {
@@ -224,26 +224,25 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
                           });
                         },
                       ),
-                      width: 100,
-                      height: 34,
                     ),
                   ],
                 ),
               ],
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
             ),
-            padding: EdgeInsets.all(20),
-            borderRadius: BorderRadius.circular(10),
           ),
-          height: height,
         ),
         SizedBox(height: 20),
         SizedBox(
+          height: height,
           child: Card(
+            padding: EdgeInsets.all(20),
+            borderRadius: BorderRadius.circular(10),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('时区选择'),
                 SizedBox(
+                  width: 480,
                   child: ComboBox<double>(
                     value: timezone,
                     items: timezones,
@@ -254,51 +253,46 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
                     },
                     isExpanded: true,
                   ),
-                  width: 480,
                 ),
               ],
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
             ),
-            padding: EdgeInsets.all(20),
-            borderRadius: BorderRadius.circular(10),
           ),
-          height: height,
         ),
         SizedBox(height: 20),
         SizedBox(
+          height: height,
           child: Card(
+            padding: EdgeInsets.all(20),
+            borderRadius: BorderRadius.circular(10),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [Text('Common'), Text(common)],
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
             ),
-            padding: EdgeInsets.all(20),
-            borderRadius: BorderRadius.circular(10),
           ),
-          height: height,
         ),
         SizedBox(height: 20),
         SizedBox(
+          height: height,
           child: Card(
+            padding: EdgeInsets.all(20),
+            borderRadius: BorderRadius.circular(10),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [Text('ISO 8601'), Text(iso8601)],
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
             ),
-            padding: EdgeInsets.all(20),
-            borderRadius: BorderRadius.circular(10),
           ),
-          height: height,
         ),
         SizedBox(height: 20),
         SizedBox(
+          height: height,
           child: Card(
-            child: Row(
-              children: [Text('RFC 7231'), Text(rfc7231)],
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            ),
             padding: EdgeInsets.all(20),
             borderRadius: BorderRadius.circular(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [Text('RFC 7231'), Text(rfc7231)],
+            ),
           ),
-          height: height,
         ),
       ],
     );

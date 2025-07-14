@@ -66,7 +66,7 @@ class ManualSnippetPageState extends State<ManualSnippetPage> {
       final List<dynamic> contentJson = json.decode(content);
 
       setState(() {
-        this.items = contentJson.map((json) => Manual.fromJson(json)).toList();
+        items = contentJson.map((json) => Manual.fromJson(json)).toList();
       });
     });
   }
@@ -85,22 +85,24 @@ class ManualSnippetPageState extends State<ManualSnippetPage> {
           children: [
             Expanded(
               child: Card(
+                padding: EdgeInsets.all(20),
+                borderRadius: BorderRadius.circular(10),
                 child: Column(
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Expanded(child: TextBox(maxLines: null)),
+                        Expanded(child: TextBox()),
                         SizedBox(width: 20),
                         SizedBox(
+                          width: 120,
+                          height: 34,
                           child: Button(
                             child: const Text('搜索'),
                             onPressed: () async {},
                           ),
-                          width: 120,
-                          height: 34,
                         ),
                       ],
-                      mainAxisAlignment: MainAxisAlignment.end,
                     ),
                     SizedBox(height: 20),
                     Expanded(
@@ -124,8 +126,6 @@ class ManualSnippetPageState extends State<ManualSnippetPage> {
                     ),
                   ],
                 ),
-                padding: EdgeInsets.all(20),
-                borderRadius: BorderRadius.circular(10),
               ),
             ),
           ],

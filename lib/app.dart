@@ -40,11 +40,11 @@ class App {
   }
 
   static Future<String> getHashBin() async {
-    return join(await getDir(), "app", "plugin", "hash", "hash" + ext);
+    return join(await getDir(), "app", "plugin", "hash", "hash$ext");
   }
 
   static Future<String> getQrcodeBin() async {
-    return join(await getDir(), "app", "plugin", "qrcode", "qrcode" + ext);
+    return join(await getDir(), "app", "plugin", "qrcode", "qrcode$ext");
   }
 
   static Future<String> getManualRoot() async {

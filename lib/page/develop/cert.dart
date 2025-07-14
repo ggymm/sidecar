@@ -67,12 +67,15 @@ class CertDevelopPageState extends State<CertDevelopPage> {
               child: Column(
                 children: [
                   SizedBox(
+                    height: 240,
                     child: Card(
+                      padding: EdgeInsets.all(20),
+                      borderRadius: BorderRadius.circular(10),
                       child: Column(
                         children: [
                           Align(
-                            child: Text('证书'),
                             alignment: Alignment.centerLeft,
+                            child: Text('证书'),
                           ),
                           SizedBox(height: 16),
                           Expanded(
@@ -85,19 +88,18 @@ class CertDevelopPageState extends State<CertDevelopPage> {
                           ),
                         ],
                       ),
-                      padding: EdgeInsets.all(20),
-                      borderRadius: BorderRadius.circular(10),
                     ),
-                    height: 240,
                   ),
                   SizedBox(height: 20),
                   Expanded(
                     child: Card(
+                      padding: EdgeInsets.all(20),
+                      borderRadius: BorderRadius.circular(10),
                       child: Column(
                         children: [
                           Align(
-                            child: Text('解析结果'),
                             alignment: Alignment.centerLeft,
+                            child: Text('解析结果'),
                           ),
                           SizedBox(height: 16),
                           Expanded(
@@ -111,8 +113,6 @@ class CertDevelopPageState extends State<CertDevelopPage> {
                           ),
                         ],
                       ),
-                      padding: EdgeInsets.all(20),
-                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ],

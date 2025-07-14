@@ -69,6 +69,14 @@ final Widget qrcodeIcon = SvgPicture.asset(
   semanticsLabel: 'Qrcode Icon',
 );
 
+final Widget randomIcon = SvgPicture.asset(
+  'asset/icon/random.svg',
+  width: size,
+  height: size,
+  colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+  semanticsLabel: 'Random Icon',
+);
+
 /// ========== 代码片段 ==========
 final Widget codeIcon = SvgPicture.asset(
   'asset/icon/code.svg',

@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:fluent_ui/fluent_ui.dart';
 
 class Base64ConvertPage extends StatefulWidget {
+  const Base64ConvertPage({super.key});
+
   @override
   State<Base64ConvertPage> createState() => Base64ConvertPageState();
 }
@@ -77,11 +79,13 @@ class Base64ConvertPageState extends State<Base64ConvertPage> {
                 children: [
                   Expanded(
                     child: Card(
+                      padding: EdgeInsets.all(20),
+                      borderRadius: BorderRadius.circular(10),
                       child: Column(
                         children: [
                           Align(
-                            child: Text('原始内容'),
                             alignment: Alignment.centerLeft,
+                            child: Text('原始内容'),
                           ),
                           SizedBox(height: 16),
                           Expanded(
@@ -94,18 +98,18 @@ class Base64ConvertPageState extends State<Base64ConvertPage> {
                           ),
                         ],
                       ),
-                      padding: EdgeInsets.all(20),
-                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   SizedBox(height: 20),
                   Expanded(
                     child: Card(
+                      padding: EdgeInsets.all(20),
+                      borderRadius: BorderRadius.circular(10),
                       child: Column(
                         children: [
                           Align(
-                            child: Text('编码内容'),
                             alignment: Alignment.centerLeft,
+                            child: Text('编码内容'),
                           ),
                           SizedBox(height: 16),
                           Expanded(
@@ -118,8 +122,6 @@ class Base64ConvertPageState extends State<Base64ConvertPage> {
                           ),
                         ],
                       ),
-                      padding: EdgeInsets.all(20),
-                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ],

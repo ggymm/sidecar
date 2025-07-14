@@ -13,12 +13,15 @@ class QrcodeDevelopPage extends StatefulWidget {
 }
 
 class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
-  var qrcode;
+  String? qrcode;
   var output = TextEditingController();
 
-  parseQrcode() async {
+  void parseQrcode() async {
+    if (qrcode == null) {
+      return;
+    }
     final bin = await App.getQrcodeBin();
-    final result = await Process.run(bin, [qrcode], stdoutEncoding: utf8);
+    final result = await Process.run(bin, [qrcode!], stdoutEncoding: utf8);
     setState(() {
       output.text = result.stdout;
     });
@@ -41,14 +44,19 @@ class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
                 children: [
                   Expanded(
                     child: Card(
+                      padding: EdgeInsets.all(20),
+                      borderRadius: BorderRadius.circular(10),
                       child: Column(
                         children: [
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('文件'),
                               Row(
                                 children: [
                                   SizedBox(
+                                    width: 120,
+                                    height: 34,
                                     child: Button(
                                       child: const Text('选择文件'),
                                       onPressed: () async {
@@ -61,34 +69,32 @@ class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
                                         }
                                       },
                                     ),
-                                    width: 120,
-                                    height: 34,
                                   ),
                                 ],
                               ),
                             ],
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           ),
                           Expanded(
                             child:
                                 qrcode == null
                                     ? SizedBox()
-                                    : Image.file(File(qrcode)),
+                                    : Image.file(File(qrcode!)),
                           ),
                         ],
                       ),
-                      padding: EdgeInsets.all(20),
-                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   SizedBox(height: 20),
                   SizedBox(
+                    height: 240,
                     child: Card(
+                      padding: EdgeInsets.all(20),
+                      borderRadius: BorderRadius.circular(10),
                       child: Column(
                         children: [
                           Row(
-                            children: [Text('解析结果')],
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [Text('解析结果')],
                           ),
                           SizedBox(height: 16),
                           Expanded(
@@ -101,10 +107,7 @@ class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
                           ),
                         ],
                       ),
-                      padding: EdgeInsets.all(20),
-                      borderRadius: BorderRadius.circular(10),
                     ),
-                    height: 240,
                   ),
                 ],
               ),
