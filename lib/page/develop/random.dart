@@ -70,13 +70,13 @@ class RandomDevelopPageState extends State<RandomDevelopPage> {
                           );
                           bytes[0] = (bytes[0] | 0x02) & 0xFE;
 
-                          var macAddress =
-                              bytes
-                                  .map(
-                                    (b) => b.toRadixString(16).padLeft(2, '0'),
-                                  )
-                                  .join(':')
-                                  .toUpperCase();
+                          // dart format off
+                          var macAddress = bytes
+                              .map((b) => b.toRadixString(16).padLeft(2, '0'))
+                              .join(':')
+                              .toUpperCase();
+                          // dart format on
+
                           setState(() {
                             macController.text = macAddress;
                           });
