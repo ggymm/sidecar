@@ -11,14 +11,15 @@ class RandomDevelopPage extends StatefulWidget {
 }
 
 class RandomDevelopPageState extends State<RandomDevelopPage> {
-  final macController = TextEditingController();
+  final macCtrl = TextEditingController();
+  final phoneCtrl = TextEditingController();
 
   @override
   void initState() {
     super.initState();
   }
 
-  void showToast() async {
+  void showTip() async {
     await displayInfoBar(
       context,
       builder: (context, close) {
@@ -29,17 +30,43 @@ class RandomDevelopPageState extends State<RandomDevelopPage> {
             icon: const Icon(FluentIcons.clear),
             onPressed: close,
           ),
-          severity: InfoBarSeverity.success,
+          severity: InfoBarSeverity.info,
         );
       },
     );
+  }
+
+  void randomMac() {
+    final rd = Random();
+    final bytes = List<int>.generate(6, (_) => rd.nextInt(256));
+    bytes[0] = (bytes[0] | 0x02) & 0xFE;
+
+    // dart format off
+    var macAddress = bytes
+        .map((b) => b.toRadixString(16).padLeft(2, '0'))
+        .join(':')
+        .toUpperCase();
+    // dart format on
+
+    setState(() {
+      macCtrl.text = macAddress;
+    });
+  }
+
+  void randomPhone() {
+    final rd = Random();
+    final nums = List<int>.generate(11, (_) => rd.nextInt(10));
+    nums[0] = 1;
+    setState(() {
+      phoneCtrl.text = nums.join();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final height = 80.0;
     return ScaffoldPage.scrollable(
-      header: PageHeader(title: Text('模拟数据')),
+      header: PageHeader(title: Text('随机数据')),
       children: [
         SizedBox(
           height: height,
@@ -52,34 +79,57 @@ class RandomDevelopPageState extends State<RandomDevelopPage> {
                 Text('MAC地址'),
                 Row(
                   children: [
+                    SizedBox(width: 480, child: TextBox(controller: macCtrl)),
+                    SizedBox(width: 20),
                     SizedBox(
-                      width: 480,
-                      child: TextBox(controller: macController),
+                      width: 100,
+                      height: 34,
+                      child: Button(
+                        child: const Text('生成'),
+                        onPressed: () {
+                          randomMac();
+                        },
+                      ),
                     ),
                     SizedBox(width: 20),
                     SizedBox(
                       width: 100,
                       height: 34,
                       child: Button(
-                        child: const Text('随机'),
+                        child: const Text('复制'),
                         onPressed: () {
-                          final rd = Random();
-                          final bytes = List<int>.generate(
-                            6,
-                            (_) => rd.nextInt(256),
-                          );
-                          bytes[0] = (bytes[0] | 0x02) & 0xFE;
-
-                          // dart format off
-                          var macAddress = bytes
-                              .map((b) => b.toRadixString(16).padLeft(2, '0'))
-                              .join(':')
-                              .toUpperCase();
-                          // dart format on
-
-                          setState(() {
-                            macController.text = macAddress;
-                          });
+                          Clipboard.setData(ClipboardData(text: macCtrl.text));
+                          showTip();
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(height: 20),
+        SizedBox(
+          height: height,
+          child: Card(
+            padding: EdgeInsets.all(20),
+            borderRadius: BorderRadius.circular(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('手机号码'),
+                Row(
+                  children: [
+                    SizedBox(width: 480, child: TextBox(controller: phoneCtrl)),
+                    SizedBox(width: 20),
+                    SizedBox(
+                      width: 100,
+                      height: 34,
+                      child: Button(
+                        child: const Text('生成'),
+                        onPressed: () {
+                          randomPhone();
                         },
                       ),
                     ),
@@ -91,9 +141,9 @@ class RandomDevelopPageState extends State<RandomDevelopPage> {
                         child: const Text('复制'),
                         onPressed: () {
                           Clipboard.setData(
-                            ClipboardData(text: macController.text),
+                            ClipboardData(text: phoneCtrl.text),
                           );
-                          showToast();
+                          showTip();
                         },
                       ),
                     ),

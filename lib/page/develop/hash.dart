@@ -20,29 +20,29 @@ class HashDevelopPageState extends State<HashDevelopPage> {
     ComboBoxItem<String>(value: 'file', child: Text('文件类型')),
   ];
 
-  final input = TextEditingController();
-  final output = TextEditingController();
+  final inputCtrl = TextEditingController();
+  final outputCtrl = TextEditingController();
 
   void hashFile() async {
     final bin = await App.getHashBin();
-    final result = await Process.run(bin, [input.text]);
+    final result = await Process.run(bin, [inputCtrl.text]);
     setState(() {
-      output.text = result.stdout;
+      outputCtrl.text = result.stdout;
     });
   }
 
   void hashText() async {
-    final bytes = utf8.encode(input.text);
+    final bytes = utf8.encode(inputCtrl.text);
     final md5Hash = md5.convert(bytes).toString();
     final sha1Hash = sha1.convert(bytes).toString();
     final sha256Hash = sha256.convert(bytes).toString();
     final sha512Hash = sha512.convert(bytes).toString();
 
     setState(() {
-      output.text = 'MD5:     $md5Hash';
-      output.text += '\nSHA1:    $sha1Hash';
-      output.text += '\nSHA256:  $sha256Hash';
-      output.text += '\nSHA512:  $sha512Hash';
+      outputCtrl.text = 'MD5:     $md5Hash';
+      outputCtrl.text += '\nSHA1:    $sha1Hash';
+      outputCtrl.text += '\nSHA256:  $sha256Hash';
+      outputCtrl.text += '\nSHA512:  $sha512Hash';
     });
   }
 
@@ -78,8 +78,8 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                               onChanged: (value) {
                                 setState(() {
                                   type = value!;
-                                  input.text = ''; // 清空输入框
-                                  output.text = ''; // 清空输出框
+                                  inputCtrl.text = ''; // 清空输入框
+                                  outputCtrl.text = ''; // 清空输出框
                                 });
                               },
                               isExpanded: true,
@@ -114,7 +114,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                                                     await openFile();
                                                 if (file != null) {
                                                   setState(() {
-                                                    input.text = file.path;
+                                                    inputCtrl.text = file.path;
                                                   });
                                                 }
                                               },
@@ -128,7 +128,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                                     child: Button(
                                       child: const Text('计算 Hash'),
                                       onPressed: () async {
-                                        if (input.text.isEmpty) {
+                                        if (inputCtrl.text.isEmpty) {
                                           return;
                                         }
                                         if (type == 'file') {
@@ -148,7 +148,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                             child: TextBox(
                               maxLines: null,
                               readOnly: type == 'file',
-                              controller: input,
+                              controller: inputCtrl,
                             ),
                           ),
                         ],
@@ -171,7 +171,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                             child: TextBox(
                               maxLines: null,
                               readOnly: true,
-                              controller: output,
+                              controller: outputCtrl,
                               style: TextStyle(fontFamily: 'Cascadia Mono'),
                             ),
                           ),

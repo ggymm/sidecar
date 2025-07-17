@@ -128,16 +128,16 @@ class MainPageState extends State<MainPage> {
               title: const Text('加解密工具'),
             ),
             PaneItem(
+              key: const ValueKey('/develop/random'),
+              icon: randomIcon,
+              body: const SizedBox.shrink(),
+              title: const Text('随机数据'),
+            ),
+            PaneItem(
               key: const ValueKey('/develop/qrcode'),
               icon: qrcodeIcon,
               body: const SizedBox.shrink(),
               title: const Text('二维码'),
-            ),
-            PaneItem(
-              key: const ValueKey('/develop/random'),
-              icon: randomIcon,
-              body: const SizedBox.shrink(),
-              title: const Text('模拟数据'),
             ),
           ],
         ),

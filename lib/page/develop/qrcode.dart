@@ -14,7 +14,7 @@ class QrcodeDevelopPage extends StatefulWidget {
 
 class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
   String? qrcode;
-  var output = TextEditingController();
+  var outputCtrl = TextEditingController();
 
   void parseQrcode() async {
     if (qrcode == null) {
@@ -23,7 +23,7 @@ class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
     final bin = await App.getQrcodeBin();
     final result = await Process.run(bin, [qrcode!], stdoutEncoding: utf8);
     setState(() {
-      output.text = result.stdout;
+      outputCtrl.text = result.stdout;
     });
   }
 
@@ -101,7 +101,7 @@ class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
                             child: TextBox(
                               maxLines: null,
                               readOnly: true,
-                              controller: output,
+                              controller: outputCtrl,
                               style: TextStyle(fontFamily: 'Cascadia Mono'),
                             ),
                           ),
