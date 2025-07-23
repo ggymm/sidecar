@@ -6,6 +6,7 @@ import 'package:sidecar/page/app.dart';
 import 'package:sidecar/page/setting.dart';
 import 'package:sidecar/route/convert.dart';
 import 'package:sidecar/route/develop.dart';
+import 'package:sidecar/route/network.dart';
 import 'package:sidecar/route/snippet.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -142,6 +143,26 @@ class MainPageState extends State<MainPage> {
           ],
         ),
         PaneItemExpander(
+          key: const ValueKey('/network/main'),
+          icon: appsIcon,
+          body: const SizedBox.shrink(),
+          title: const Text('网络工具'),
+          items: [
+            PaneItem(
+              key: const ValueKey('/network/dns'),
+              icon: codeIcon,
+              body: const SizedBox.shrink(),
+              title: const Text('域名查询'),
+            ),
+            PaneItem(
+              key: const ValueKey('/snippet/manual'),
+              icon: manualIcon,
+              body: const SizedBox.shrink(),
+              title: const Text('命令手册'),
+            ),
+          ],
+        ),
+        PaneItemExpander(
           key: const ValueKey('/snippet/main'),
           icon: appsIcon,
           body: const SizedBox.shrink(),
@@ -200,7 +221,7 @@ class MainPageState extends State<MainPage> {
               }
               // e.onTap?.call();
             },
-            initiallyExpanded: true,
+            // initiallyExpanded: true,
           );
         }
         if (e is PaneItem) {
@@ -400,6 +421,20 @@ final router = GoRouter(
         GoRoute(
           path: '/develop/random',
           builder: (context, state) => RandomDevelopPage(),
+        ),
+
+        // 网络工具
+        GoRoute(
+          path: '/network/main',
+          builder: (context, state) => NetworkPage(),
+        ),
+        GoRoute(
+          path: '/network/dns',
+          builder: (context, state) => DnsNetworkPage(),
+        ),
+        GoRoute(
+          path: '/network/manual',
+          builder: (context, state) => ManualSnippetPage(),
         ),
 
         // 代码片段

@@ -11,7 +11,7 @@ class SnippetPageState extends State<SnippetPage> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage.scrollable(
-      header: PageHeader(title: Text('Snippet')),
+      header: PageHeader(title: Text('代码片段')),
       children: [Text('Snippet')],
     );
   }

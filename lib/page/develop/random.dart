@@ -12,6 +12,7 @@ class RandomDevelopPage extends StatefulWidget {
 
 class RandomDevelopPageState extends State<RandomDevelopPage> {
   final macCtrl = TextEditingController();
+  final uuidCtrl = TextEditingController();
   final phoneCtrl = TextEditingController();
 
   @override
@@ -52,6 +53,8 @@ class RandomDevelopPageState extends State<RandomDevelopPage> {
       macCtrl.text = macAddress;
     });
   }
+
+  void randomUUID() {}
 
   void randomPhone() {
     final rd = Random();
@@ -99,6 +102,48 @@ class RandomDevelopPageState extends State<RandomDevelopPage> {
                         child: const Text('复制'),
                         onPressed: () {
                           Clipboard.setData(ClipboardData(text: macCtrl.text));
+                          showTip();
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(height: 20),
+        SizedBox(
+          height: height,
+          child: Card(
+            padding: EdgeInsets.all(20),
+            borderRadius: BorderRadius.circular(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('UUID.v4'),
+                Row(
+                  children: [
+                    SizedBox(width: 480, child: TextBox(controller: uuidCtrl)),
+                    SizedBox(width: 20),
+                    SizedBox(
+                      width: 100,
+                      height: 34,
+                      child: Button(
+                        child: const Text('生成'),
+                        onPressed: () {
+                          randomUUID();
+                        },
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                    SizedBox(
+                      width: 100,
+                      height: 34,
+                      child: Button(
+                        child: const Text('复制'),
+                        onPressed: () {
+                          Clipboard.setData(ClipboardData(text: uuidCtrl.text));
                           showTip();
                         },
                       ),
