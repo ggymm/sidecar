@@ -39,6 +39,10 @@ class App {
     }
   }
 
+  static Future<String> getDnsBin() async {
+    return join(await getDir(), "app", "plugin", "dns", "dns$ext");
+  }
+
   static Future<String> getHashBin() async {
     return join(await getDir(), "app", "plugin", "hash", "hash$ext");
   }

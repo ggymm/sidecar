@@ -16,7 +16,7 @@ class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
   String? qrcode;
   var outputCtrl = TextEditingController();
 
-  void parseQrcode() async {
+  Future<void> parseQrcode() async {
     if (qrcode == null) {
       return;
     }

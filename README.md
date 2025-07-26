@@ -1,14 +1,16 @@
 ## sidecar
 
+### 打包
+
+```bash
+flutter build windows --release
+```
+
 ### 图标路径
 
 #### linux
 
 linux/assets/icons/com.ggymm.sidecar.png
-
-```
-
-```
 
 #### macos
 

@@ -23,7 +23,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
   final inputCtrl = TextEditingController();
   final outputCtrl = TextEditingController();
 
-  void hashFile() async {
+  Future<void> hashFile() async {
     final bin = await App.getHashBin();
     final result = await Process.run(bin, [inputCtrl.text]);
     setState(() {
@@ -31,7 +31,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
     });
   }
 
-  void hashText() async {
+  Future<void> hashText() async {
     final bytes = utf8.encode(inputCtrl.text);
     final md5Hash = md5.convert(bytes).toString();
     final sha1Hash = sha1.convert(bytes).toString();

@@ -40,7 +40,7 @@ class ManualSnippetPageState extends State<ManualSnippetPage> {
   List<Manual> items = [];
   String selected = '';
 
-  void showContent(BuildContext context, int index) async {
+  Future<void> showContent(BuildContext context, int index) async {
     final item = items[index];
     final file = File(join(await App.getManualRoot(), item.path));
     if (!await file.exists()) {

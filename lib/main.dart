@@ -158,7 +158,7 @@ class MainPageState extends State<MainPage> {
               key: const ValueKey('/snippet/manual'),
               icon: manualIcon,
               body: const SizedBox.shrink(),
-              title: const Text('命令手册'),
+              title: const Text('本地端口查询'),
             ),
           ],
         ),

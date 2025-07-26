@@ -15,11 +15,6 @@ class RandomDevelopPageState extends State<RandomDevelopPage> {
   final uuidCtrl = TextEditingController();
   final phoneCtrl = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
   void showTip() async {
     await displayInfoBar(
       context,
