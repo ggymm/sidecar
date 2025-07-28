@@ -82,105 +82,77 @@ class MainPageState extends State<MainPage> {
           key: const ValueKey('/app'),
           icon: homeIcon,
           body: const SizedBox.shrink(),
-          title: const Text('全部工具'),
+          title: const Text('首页'),
         ),
-        PaneItemExpander(
-          key: const ValueKey('/convert/main'),
-          icon: appsIcon,
+        PaneItemHeader(header: SizedBox(height: 28, child: const Text('转换工具'))),
+        PaneItem(
+          key: const ValueKey('/convert/base64'),
+          icon: base64Icon,
           body: const SizedBox.shrink(),
-          title: const Text('转换工具'),
-          items: [
-            PaneItem(
-              key: const ValueKey('/convert/base64'),
-              icon: base64Icon,
-              body: const SizedBox.shrink(),
-              title: const Text('Base64'),
-            ),
-            PaneItem(
-              key: const ValueKey('/convert/timestamp'),
-              icon: timestampIcon,
-              body: const SizedBox.shrink(),
-              title: const Text('时间戳转换'),
-            ),
-          ],
+          title: const Text('Base64'),
         ),
-        PaneItemExpander(
-          key: const ValueKey('/develop/main'),
-          icon: appsIcon,
+        PaneItem(
+          key: const ValueKey('/convert/timestamp'),
+          icon: timestampIcon,
           body: const SizedBox.shrink(),
-          title: const Text('开发工具'),
-          items: [
-            PaneItem(
-              key: const ValueKey('/develop/cert'),
-              icon: certIcon,
-              body: const SizedBox.shrink(),
-              title: const Text('证书解析'),
-            ),
-            PaneItem(
-              key: const ValueKey('/develop/hash'),
-              icon: hashIcon,
-              body: const SizedBox.shrink(),
-              title: const Text('哈希散列'),
-            ),
-            PaneItem(
-              key: const ValueKey('/develop/crypto'),
-              icon: cryptoIcon,
-              body: const SizedBox.shrink(),
-              title: const Text('加解密工具'),
-            ),
-            PaneItem(
-              key: const ValueKey('/develop/random'),
-              icon: randomIcon,
-              body: const SizedBox.shrink(),
-              title: const Text('随机数据'),
-            ),
-            PaneItem(
-              key: const ValueKey('/develop/qrcode'),
-              icon: qrcodeIcon,
-              body: const SizedBox.shrink(),
-              title: const Text('二维码'),
-            ),
-          ],
+          title: const Text('时间戳转换'),
         ),
-        PaneItemExpander(
-          key: const ValueKey('/network/main'),
-          icon: appsIcon,
+        PaneItemHeader(header: SizedBox(height: 28, child: const Text('开发工具'))),
+        PaneItem(
+          key: const ValueKey('/develop/cert'),
+          icon: certIcon,
           body: const SizedBox.shrink(),
-          title: const Text('网络工具'),
-          items: [
-            PaneItem(
-              key: const ValueKey('/network/dns'),
-              icon: codeIcon,
-              body: const SizedBox.shrink(),
-              title: const Text('域名查询'),
-            ),
-            PaneItem(
-              key: const ValueKey('/snippet/manual'),
-              icon: manualIcon,
-              body: const SizedBox.shrink(),
-              title: const Text('本地端口查询'),
-            ),
-          ],
+          title: const Text('证书解析'),
         ),
-        PaneItemExpander(
-          key: const ValueKey('/snippet/main'),
-          icon: appsIcon,
+        PaneItem(
+          key: const ValueKey('/develop/hash'),
+          icon: hashIcon,
           body: const SizedBox.shrink(),
-          title: const Text('代码片段'),
-          items: [
-            PaneItem(
-              key: const ValueKey('/snippet/code'),
-              icon: codeIcon,
-              body: const SizedBox.shrink(),
-              title: const Text('代码库'),
-            ),
-            PaneItem(
-              key: const ValueKey('/snippet/manual'),
-              icon: manualIcon,
-              body: const SizedBox.shrink(),
-              title: const Text('命令手册'),
-            ),
-          ],
+          title: const Text('哈希散列'),
+        ),
+        PaneItem(
+          key: const ValueKey('/develop/crypto'),
+          icon: cryptoIcon,
+          body: const SizedBox.shrink(),
+          title: const Text('加解密工具'),
+        ),
+        PaneItem(
+          key: const ValueKey('/develop/random'),
+          icon: randomIcon,
+          body: const SizedBox.shrink(),
+          title: const Text('随机数据'),
+        ),
+        PaneItem(
+          key: const ValueKey('/develop/qrcode'),
+          icon: qrcodeIcon,
+          body: const SizedBox.shrink(),
+          title: const Text('二维码'),
+        ),
+        PaneItemHeader(header: SizedBox(height: 28, child: const Text('网络工具'))),
+        PaneItem(
+          key: const ValueKey('/network/dns'),
+          icon: codeIcon,
+          body: const SizedBox.shrink(),
+          title: const Text('域名查询'),
+        ),
+        PaneItem(
+          key: const ValueKey('/snippet/manual'),
+          icon: manualIcon,
+          body: const SizedBox.shrink(),
+          title: const Text('本地端口查询'),
+        ),
+        PaneItemHeader(header: SizedBox(height: 28, child: const Text('代码片段'))),
+        PaneItem(
+          key: const ValueKey('/snippet/code'),
+          icon: codeIcon,
+          body: const SizedBox.shrink(),
+          title: const Text('代码库'),
+        ),
+        PaneItem(
+          key: const ValueKey('/snippet/manual'),
+          icon: manualIcon,
+          body: const SizedBox.shrink(),
+          title: const Text('命令手册'),
         ),
       ].map<NavigationPaneItem>((e) {
         PaneItem buildItem(PaneItem item) {
@@ -323,9 +295,9 @@ class MainPageState extends State<MainPage> {
         size: const NavigationPaneSize(
           topHeight: 40,
           headerHeight: 40,
-          openWidth: 280,
-          openMinWidth: 280,
-          openMaxWidth: 280,
+          openWidth: 220,
+          openMinWidth: 220,
+          openMaxWidth: 220,
         ),
         displayMode: PaneDisplayMode.open,
         autoSuggestBox: Builder(

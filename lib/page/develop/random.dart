@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/services.dart';
+import 'package:uuid/uuid.dart';
 
 class RandomDevelopPage extends StatefulWidget {
   const RandomDevelopPage({super.key});
@@ -49,7 +50,12 @@ class RandomDevelopPageState extends State<RandomDevelopPage> {
     });
   }
 
-  void randomUUID() {}
+  void randomUUID() {
+    final uuid = Uuid().v4();
+    setState(() {
+      uuidCtrl.text = uuid;
+    });
+  }
 
   void randomPhone() {
     final rd = Random();
@@ -159,6 +165,50 @@ class RandomDevelopPageState extends State<RandomDevelopPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('手机号码'),
+                Row(
+                  children: [
+                    SizedBox(width: 480, child: TextBox(controller: phoneCtrl)),
+                    SizedBox(width: 20),
+                    SizedBox(
+                      width: 100,
+                      height: 34,
+                      child: Button(
+                        child: const Text('生成'),
+                        onPressed: () {
+                          randomPhone();
+                        },
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                    SizedBox(
+                      width: 100,
+                      height: 34,
+                      child: Button(
+                        child: const Text('复制'),
+                        onPressed: () {
+                          Clipboard.setData(
+                            ClipboardData(text: phoneCtrl.text),
+                          );
+                          showTip();
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(height: 20),
+        SizedBox(
+          height: height,
+          child: Card(
+            padding: EdgeInsets.all(20),
+            borderRadius: BorderRadius.circular(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('身份证号'),
                 Row(
                   children: [
                     SizedBox(width: 480, child: TextBox(controller: phoneCtrl)),
