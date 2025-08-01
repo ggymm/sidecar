@@ -11,19 +11,18 @@ class App {
     var arch = "";
     if (Platform.isWindows) {
       os = "win";
-      var archEnv = Platform.environment['PROCESSOR_ARCHITECTURE'];
-      if (archEnv != null) {
-        arch = archEnv.toLowerCase();
+      var output = Platform.environment['PROCESSOR_ARCHITECTURE'];
+      if (output != null) {
+        arch = output.toLowerCase();
       }
     } else if (Platform.isMacOS) {
       os = "mac";
-      var archEnv = Platform.environment["HOSTTYPE"];
-      if (archEnv != null) {
-        if (archEnv == "x86_64") {
-          arch = "amd64";
-        } else if (archEnv == "arm64") {
-          arch = "arm64";
-        }
+      var result = Process.runSync('uname', ['-m']);
+      var output = result.stdout.toString().trim();
+      if (output == "x86_64") {
+        arch = "amd64";
+      } else if (output == "arm64") {
+        arch = "arm64";
       }
     }
     ext = "-$os-$arch";

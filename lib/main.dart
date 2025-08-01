@@ -24,6 +24,7 @@ void main() async {
       skipTaskbar: false,
       titleBarStyle: TitleBarStyle.hidden,
       backgroundColor: Colors.transparent,
+      windowButtonVisibility: false,
     ),
     () async {
       await windowManager.show();
