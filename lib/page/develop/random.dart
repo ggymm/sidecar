@@ -200,49 +200,6 @@ class RandomDevelopPageState extends State<RandomDevelopPage> {
           ),
         ),
         SizedBox(height: 20),
-        SizedBox(
-          height: height,
-          child: Card(
-            padding: EdgeInsets.all(20),
-            borderRadius: BorderRadius.circular(10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('身份证号'),
-                Row(
-                  children: [
-                    SizedBox(width: 480, child: TextBox(controller: phoneCtrl)),
-                    SizedBox(width: 20),
-                    SizedBox(
-                      width: 100,
-                      height: 34,
-                      child: Button(
-                        child: const Text('生成'),
-                        onPressed: () {
-                          randomPhone();
-                        },
-                      ),
-                    ),
-                    SizedBox(width: 20),
-                    SizedBox(
-                      width: 100,
-                      height: 34,
-                      child: Button(
-                        child: const Text('复制'),
-                        onPressed: () {
-                          Clipboard.setData(
-                            ClipboardData(text: phoneCtrl.text),
-                          );
-                          showTip();
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
       ],
     );
   }
