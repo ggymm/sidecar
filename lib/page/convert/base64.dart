@@ -10,56 +10,37 @@ class Base64ConvertPage extends StatefulWidget {
 }
 
 class Base64ConvertPageState extends State<Base64ConvertPage> {
-  final originNode = FocusNode();
   final originCtrl = TextEditingController();
+  final resultCtrl = TextEditingController();
 
-  final encodeNode = FocusNode();
-  final encodeCtrl = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-
-    originNode.addListener(() {
-      setState(() {
-        encodeCtrl.text = '';
-        final text = originCtrl.text;
-        if (text.isNotEmpty) {
-          try {
-            final encode = base64Encode(utf8.encode(text));
-            if (encode.isNotEmpty) {
-              encodeCtrl.text = encode;
-            }
-          } catch (e) {
-            encodeCtrl.text = '编码失败: $e';
-          }
+  void encode() {
+    resultCtrl.text = '';
+    final text = originCtrl.text;
+    if (text.isNotEmpty) {
+      try {
+        final encode = base64Encode(utf8.encode(text));
+        if (encode.isNotEmpty) {
+          resultCtrl.text = encode;
         }
-      });
-    });
-
-    encodeNode.addListener(() {
-      setState(() {
-        originCtrl.text = '';
-        final text = encodeCtrl.text;
-        if (text.isNotEmpty) {
-          try {
-            final decode = base64Decode(text);
-            if (decode.isNotEmpty) {
-              originCtrl.text = utf8.decode(decode);
-            }
-          } catch (e) {
-            originCtrl.text = '解码失败: $e';
-          }
-        }
-      });
-    });
+      } catch (e) {
+        resultCtrl.text = '编码失败: $e';
+      }
+    }
   }
 
-  @override
-  void dispose() {
-    originNode.dispose();
-    encodeNode.dispose();
-    super.dispose();
+  void decode() {
+    originCtrl.text = '';
+    final text = resultCtrl.text;
+    if (text.isNotEmpty) {
+      try {
+        final decode = base64Decode(text);
+        if (decode.isNotEmpty) {
+          originCtrl.text = utf8.decode(decode);
+        }
+      } catch (e) {
+        originCtrl.text = '解码失败: $e';
+      }
+    }
   }
 
   @override
@@ -92,8 +73,10 @@ class Base64ConvertPageState extends State<Base64ConvertPage> {
                             child: TextBox(
                               minLines: 1,
                               maxLines: null,
-                              focusNode: originNode,
                               controller: originCtrl,
+                              onChanged: (v) {
+                                encode();
+                              },
                             ),
                           ),
                         ],
@@ -116,8 +99,10 @@ class Base64ConvertPageState extends State<Base64ConvertPage> {
                             child: TextBox(
                               minLines: 1,
                               maxLines: null,
-                              focusNode: encodeNode,
-                              controller: encodeCtrl,
+                              controller: resultCtrl,
+                              onChanged: (v) {
+                                decode();
+                              },
                             ),
                           ),
                         ],
