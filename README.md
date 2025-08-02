@@ -1,6 +1,14 @@
 ## sidecar
 
-### 打包
+### 环境变量
+
+```bash
+# 编辑 ～/.zprofile 文件
+export PUB_HOSTED_URL="https://pub.flutter-io.cn"
+export FLUTTER_STORAGE_BASE_URL="https://storage.flutter-io.cn"
+```
+
+### 打包命令
 
 ```bash
 flutter build windows --release
