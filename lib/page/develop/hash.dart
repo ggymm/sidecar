@@ -25,9 +25,9 @@ class HashDevelopPageState extends State<HashDevelopPage> {
 
   Future<void> hashFile() async {
     final bin = await App.getHashBin();
-    final result = await Process.run(bin, [inputCtrl.text]);
+    final output = await Process.run(bin, [inputCtrl.text]);
     setState(() {
-      outputCtrl.text = result.stdout;
+      outputCtrl.text = output.stdout;
     });
   }
 

@@ -20,6 +20,16 @@ final Widget appsIcon = SvgPicture.asset(
 );
 
 /// ========== 转换工具 ==========
+final Widget shareIcon = SvgPicture.asset(
+  'asset/icon/share.svg',
+  width: size,
+  height: size,
+  colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+  semanticsLabel: 'Share Icon',
+);
+
+
+/// ========== 转换工具 ==========
 final Widget base64Icon = SvgPicture.asset(
   'asset/icon/base64.svg',
   width: size,

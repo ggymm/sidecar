@@ -21,9 +21,9 @@ class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
       return;
     }
     final bin = await App.getQrcodeBin();
-    final result = await Process.run(bin, [qrcode!], stdoutEncoding: utf8);
+    final output = await Process.run(bin, [qrcode!], stdoutEncoding: utf8);
     setState(() {
-      outputCtrl.text = result.stdout;
+      outputCtrl.text = output.stdout;
     });
   }
 

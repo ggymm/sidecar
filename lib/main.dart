@@ -4,6 +4,8 @@ import 'package:sidecar/app.dart';
 import 'package:sidecar/icon.dart';
 import 'package:sidecar/page/app.dart';
 import 'package:sidecar/page/setting.dart';
+import 'package:sidecar/page/toolkit.dart';
+import 'package:sidecar/page/toolkit/share.dart';
 import 'package:sidecar/route/convert.dart';
 import 'package:sidecar/route/develop.dart';
 import 'package:sidecar/route/network.dart';
@@ -69,6 +71,8 @@ class MainPage extends StatefulWidget {
 }
 
 class MainPageState extends State<MainPage> {
+  final paneHeaderHeight = 28.0;
+
   final searchFocusNode = FocusNode();
   final searchController = TextEditingController();
 
@@ -84,6 +88,13 @@ class MainPageState extends State<MainPage> {
           icon: homeIcon,
           body: const SizedBox.shrink(),
           title: const Text('首页'),
+        ),
+        PaneItemHeader(header: SizedBox(height: 28, child: const Text('便捷工具'))),
+        PaneItem(
+          key: const ValueKey('/toolkit/share'),
+          icon: shareIcon,
+          body: const SizedBox.shrink(),
+          title: const Text('文件分享'),
         ),
         PaneItemHeader(header: SizedBox(height: 28, child: const Text('转换工具'))),
         PaneItem(
@@ -137,7 +148,7 @@ class MainPageState extends State<MainPage> {
           title: const Text('域名查询'),
         ),
         PaneItem(
-          key: const ValueKey('/snippet/manual'),
+          key: const ValueKey('/network/port'),
           icon: manualIcon,
           body: const SizedBox.shrink(),
           title: const Text('端口占用查询'),
@@ -356,6 +367,16 @@ final router = GoRouter(
         GoRoute(path: '/app', builder: (context, state) => AppPage()),
         GoRoute(path: '/setting', builder: (context, state) => SettingPage()),
 
+        // 便捷工具
+        GoRoute(
+          path: '/toolkit/main',
+          builder: (context, state) => ToolkitPage(),
+        ),
+        GoRoute(
+          path: '/toolkit/share',
+          builder: (context, state) => ShareToolkitPage(),
+        ),
+
         // 转换工具
         GoRoute(
           path: '/convert/main',
@@ -406,8 +427,8 @@ final router = GoRouter(
           builder: (context, state) => DnsNetworkPage(),
         ),
         GoRoute(
-          path: '/network/manual',
-          builder: (context, state) => ManualSnippetPage(),
+          path: '/network/port',
+          builder: (context, state) => PortNetworkPage(),
         ),
 
         // 代码片段

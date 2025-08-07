@@ -13,6 +13,7 @@ class DnsNetworkPage extends StatefulWidget {
 
 class DnsNetworkPageState extends State<DnsNetworkPage> {
   var starting = false;
+
   final domainCtrl = TextEditingController();
   final outputCtrl = TextEditingController();
   final outputScrollCtrl = ScrollController();
