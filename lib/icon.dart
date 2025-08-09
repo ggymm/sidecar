@@ -88,12 +88,20 @@ final Widget randomIcon = SvgPicture.asset(
 );
 
 /// ========== 网络工具 ==========
-final Widget domainIcon = SvgPicture.asset(
-  'asset/icon/domain.svg',
+final Widget dnsIcon = SvgPicture.asset(
+  'asset/icon/dns.svg',
   width: size,
   height: size,
   colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-  semanticsLabel: 'Domain Icon',
+  semanticsLabel: 'Dns Icon',
+);
+
+final Widget portIcon = SvgPicture.asset(
+  'asset/icon/port.svg',
+  width: size,
+  height: size,
+  colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+  semanticsLabel: 'Port Icon',
 );
 
 /// ========== 代码片段 ==========

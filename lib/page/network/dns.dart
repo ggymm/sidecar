@@ -110,6 +110,7 @@ class DnsNetworkPageState extends State<DnsNetworkPage> {
                     Expanded(
                       child: TextBox(
                         maxLines: null,
+                        readOnly: true,
                         controller: outputCtrl,
                         scrollController: outputScrollCtrl,
                       ),

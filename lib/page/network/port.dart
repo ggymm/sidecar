@@ -93,6 +93,7 @@ class PortNetworkPageState extends State<PortNetworkPage> {
                     Expanded(
                       child: TextBox(
                         maxLines: null,
+                        readOnly: true,
                         controller: outputCtrl,
                         scrollController: outputScrollCtrl,
                       ),

@@ -143,13 +143,13 @@ class MainPageState extends State<MainPage> {
         PaneItemHeader(header: SizedBox(height: 28, child: const Text('网络工具'))),
         PaneItem(
           key: const ValueKey('/network/dns'),
-          icon: domainIcon,
+          icon: dnsIcon,
           body: const SizedBox.shrink(),
           title: const Text('域名查询'),
         ),
         PaneItem(
           key: const ValueKey('/network/port'),
-          icon: manualIcon,
+          icon: portIcon,
           body: const SizedBox.shrink(),
           title: const Text('端口占用查询'),
         ),
