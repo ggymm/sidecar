@@ -25,7 +25,7 @@ class DnsNetworkPageState extends State<DnsNetworkPage> {
       return;
     }
     try {
-      final uri = Uri.parse("https://$domain");
+      final uri = Uri.parse('https://$domain');
       if (uri.host.isEmpty ||
           (uri.host != domain && !uri.host.endsWith('.$domain'))) {
         return;

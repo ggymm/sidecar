@@ -4,28 +4,28 @@ import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 
 class App {
-  static var ext = "";
+  static var ext = '';
 
   static Future<void> init() async {
-    var os = "";
-    var arch = "";
+    var os = '';
+    var arch = '';
     if (Platform.isWindows) {
-      os = "win";
+      os = 'win';
       var output = Platform.environment['PROCESSOR_ARCHITECTURE'];
       if (output != null) {
         arch = output.toLowerCase();
       }
     } else if (Platform.isMacOS) {
-      os = "mac";
+      os = 'mac';
       var result = Process.runSync('uname', ['-m']);
       var output = result.stdout.toString().trim();
-      if (output == "x86_64") {
-        arch = "amd64";
-      } else if (output == "arm64") {
-        arch = "arm64";
+      if (output == 'x86_64') {
+        arch = 'amd64';
+      } else if (output == 'arm64') {
+        arch = 'arm64';
       }
     }
-    ext = "-$os-$arch";
+    ext = '-$os-$arch';
   }
 
   static Future<String> getDir() async {
@@ -39,22 +39,22 @@ class App {
   }
 
   static Future<String> getDnsBin() async {
-    return join(await getDir(), "app", "plugin", "dns", "dns$ext");
+    return join(await getDir(), 'app', 'plugin', 'dns', 'dns$ext');
   }
 
   static Future<String> getHashBin() async {
-    return join(await getDir(), "app", "plugin", "hash", "hash$ext");
+    return join(await getDir(), 'app', 'plugin', 'hash', 'hash$ext');
   }
 
   static Future<String> getQrcodeBin() async {
-    return join(await getDir(), "app", "plugin", "qrcode", "qrcode$ext");
+    return join(await getDir(), 'app', 'plugin', 'qrcode', 'qrcode$ext');
   }
 
   static Future<String> getManualRoot() async {
-    return join(await getDir(), "app", "snippet", "manual");
+    return join(await getDir(), 'app', 'snippet', 'manual');
   }
 
   static Future<String> getManualIndex() async {
-    return join(await getDir(), "app", "snippet", "manual", "index.json");
+    return join(await getDir(), 'app', 'snippet', 'manual', 'index.json');
   }
 }
