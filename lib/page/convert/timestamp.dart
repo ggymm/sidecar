@@ -112,12 +112,12 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
     switch (unit) {
       case 1:
         common = "$year-$month-$day $hour:$minute:$second";
-        iso8601 = "$year-$month-$day\\T$hour:$minute:$second$zone";
+        iso8601 = "$year-$month-${day}T$hour:$minute:$second$zone";
         break;
       case 1000:
         String millisecond = time.millisecond.toString().padLeft(3, '0');
         common = "$year-$month-$day $hour:$minute:$second.$millisecond";
-        iso8601 = "$year-$month-$day\\T$hour:$minute:$second.$millisecond$zone";
+        iso8601 = "$year-$month-${day}T$hour:$minute:$second.$millisecond$zone";
         break;
     }
   }
@@ -191,18 +191,18 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
                             }
                             unit = v;
 
-                            // 修改 input
-                            switch (unit) {
-                              case 1:
-                                input = (input / 1000).toInt();
-                                break;
-                              case 1000:
-                                input = (input * 1000).toInt();
-                                break;
-                            }
-
-                            // 运行格式化方法
-                            runFormat();
+                            // // 修改 input
+                            // switch (unit) {
+                            //   case 1:
+                            //     input = (input / 1000).toInt();
+                            //     break;
+                            //   case 1000:
+                            //     input = (input * 1000).toInt();
+                            //     break;
+                            // }
+                            //
+                            // // 运行格式化方法
+                            // runFormat();
                           });
                         },
                         isExpanded: true,
