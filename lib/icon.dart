@@ -5,8 +5,8 @@ const size = 20.0;
 
 final Widget homeIcon = SvgPicture.asset(
   'asset/icon/home.svg',
-  width: 18.0,
-  height: 18.0,
+  width: size,
+  height: size,
   colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
   semanticsLabel: 'Home Icon',
 );

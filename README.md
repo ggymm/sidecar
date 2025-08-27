@@ -11,6 +11,8 @@ export FLUTTER_STORAGE_BASE_URL="https://storage.flutter-io.cn"
 ### 打包命令
 
 ```bash
+flutter clean
+flutter build macos --release --no-tree-shake-icons
 flutter build windows --release
 ```
 

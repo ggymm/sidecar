@@ -23,6 +23,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
   final inputCtrl = TextEditingController();
   final outputCtrl = TextEditingController();
 
+
   Future<void> hashFile() async {
     final bin = await App.getHashBin();
     final output = await Process.run(bin, [inputCtrl.text]);

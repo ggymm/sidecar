@@ -17,7 +17,6 @@ dependencies:
   window_manager: 0.5.1
   uuid: 4.5.1
   x509: 0.2.4+3
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
