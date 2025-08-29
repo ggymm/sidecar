@@ -52,10 +52,11 @@ class MainFlutterWindow: NSWindow {
       return
     }
 
+    let xPos: CGFloat = 6.0
     let yPos: CGFloat = -6.0
 
-    closeButton.setFrameOrigin(NSPoint(x: 12.0, y: yPos))
-    miniaturizeButton.setFrameOrigin(NSPoint(x: 32.0, y: yPos))
-    zoomButton.setFrameOrigin(NSPoint(x: 52.0, y: yPos))
+    closeButton.setFrameOrigin(NSPoint(x: 12.0 + xPos, y: yPos))
+    miniaturizeButton.setFrameOrigin(NSPoint(x: 32.0 + xPos, y: yPos))
+    zoomButton.setFrameOrigin(NSPoint(x: 52.0 + xPos, y: yPos))
   }
 }

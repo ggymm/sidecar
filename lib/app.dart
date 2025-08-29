@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 
@@ -38,18 +39,31 @@ class App {
     }
   }
 
+  /// 获取插件目录
+
+  // 获取 dns 插件路径
   static Future<String> getDnsBin() async {
     return join(await getDir(), 'app', 'plugin', 'dns', 'dns$ext');
   }
 
+  // 获取 hash 插件路径
   static Future<String> getHashBin() async {
     return join(await getDir(), 'app', 'plugin', 'hash', 'hash$ext');
   }
 
+  // 获取 qrcode 插件路径
   static Future<String> getQrcodeBin() async {
     return join(await getDir(), 'app', 'plugin', 'qrcode', 'qrcode$ext');
   }
 
+  // 获取 share 插件路径
+  static Future<String> getShareBin() async {
+    return join(await getDir(), 'app', 'plugin', 'share', 'share$ext');
+  }
+
+  /// 获取代码片段目录
+
+  // 获取 manual 目录
   static Future<String> getManualRoot() async {
     return join(await getDir(), 'app', 'snippet', 'manual');
   }

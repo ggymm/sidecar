@@ -144,7 +144,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 20),
                           Expanded(
                             child: TextBox(
                               maxLines: null,
@@ -167,7 +167,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [Text('输出结果')],
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 20),
                           Expanded(
                             child: TextBox(
                               maxLines: null,

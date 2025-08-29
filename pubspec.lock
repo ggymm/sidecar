@@ -89,6 +89,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.3.0+2"
+  easyqrimage:
+    dependency: "direct main"
+    description:
+      name: easyqrimage
+      sha256: aa923a0ae5002b08f6c1aba33c62d11b24e85fc744a76a26dee7f3d34afbb107
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.2"
   fake_async:
     dependency: transitive
     description:

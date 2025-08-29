@@ -30,7 +30,7 @@ class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
-      header: PageHeader(title: Text('二维码')),
+      header: PageHeader(title: Text('二维码解析')),
       content: Padding(
         padding: EdgeInsetsDirectional.only(
           end: PageHeader.horizontalPadding(context),
@@ -77,8 +77,11 @@ class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
                           Expanded(
                             child:
                                 qrcode == null
-                                    ? SizedBox()
-                                    : Image.file(File(qrcode!)),
+                                    ? SizedBox.shrink()
+                                    : Padding(
+                                      padding: EdgeInsets.all(20),
+                                      child: Image.file(File(qrcode!)),
+                                    ),
                           ),
                         ],
                       ),
@@ -96,7 +99,7 @@ class QrcodeDevelopPageState extends State<QrcodeDevelopPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [Text('解析结果')],
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 20),
                           Expanded(
                             child: TextBox(
                               maxLines: null,

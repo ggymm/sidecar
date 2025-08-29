@@ -46,7 +46,7 @@ class Base64ConvertPageState extends State<Base64ConvertPage> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
-      header: PageHeader(title: Text('Base64')),
+      header: PageHeader(title: Text('Base64编解码')),
       content: Padding(
         padding: EdgeInsetsDirectional.only(
           end: PageHeader.horizontalPadding(context),
@@ -68,7 +68,7 @@ class Base64ConvertPageState extends State<Base64ConvertPage> {
                             alignment: Alignment.centerLeft,
                             child: Text('原始内容'),
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 20),
                           Expanded(
                             child: TextBox(
                               minLines: 1,
@@ -94,7 +94,7 @@ class Base64ConvertPageState extends State<Base64ConvertPage> {
                             alignment: Alignment.centerLeft,
                             child: Text('编码内容'),
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 20),
                           Expanded(
                             child: TextBox(
                               minLines: 1,
