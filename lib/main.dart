@@ -1,36 +1,57 @@
+import 'dart:io';
+
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sidecar/app.dart';
 import 'package:sidecar/icon.dart';
 import 'package:sidecar/page/app.dart';
 import 'package:sidecar/page/setting.dart';
+import 'package:sidecar/page/toolkit.dart';
+import 'package:sidecar/page/toolkit/share.dart';
 import 'package:sidecar/route/convert.dart';
 import 'package:sidecar/route/develop.dart';
 import 'package:sidecar/route/network.dart';
 import 'package:sidecar/route/snippet.dart';
 import 'package:window_manager/window_manager.dart';
 
-const double appBarHeight = 48.0;
+const double appBarSize = 48.0;
+const String appBarTitle = 'Sidecar App';
 
 void main() async {
   App.init();
   WidgetsFlutterBinding.ensureInitialized();
 
   await windowManager.ensureInitialized();
-  windowManager.waitUntilReadyToShow(
-    WindowOptions(
-      size: Size(1280, 800),
-      minimumSize: Size(1280, 800),
-      skipTaskbar: false,
-      titleBarStyle: TitleBarStyle.hidden,
-      backgroundColor: Colors.transparent,
-      windowButtonVisibility: false,
-    ),
-    () async {
-      await windowManager.show();
-      await windowManager.focus();
-    },
-  );
+  if (Platform.isMacOS) {
+    windowManager.waitUntilReadyToShow(
+      WindowOptions(
+        size: Size(1280, 800),
+        minimumSize: Size(1280, 800),
+        skipTaskbar: false,
+        windowButtonVisibility: true,
+        titleBarStyle: TitleBarStyle.hidden,
+      ),
+      () async {
+        await windowManager.show();
+        await windowManager.focus();
+      },
+    );
+  } else {
+    windowManager.waitUntilReadyToShow(
+      WindowOptions(
+        size: Size(1280, 800),
+        minimumSize: Size(1280, 800),
+        skipTaskbar: false,
+        windowButtonVisibility: false,
+        titleBarStyle: TitleBarStyle.hidden,
+        backgroundColor: Colors.transparent,
+      ),
+      () async {
+        await windowManager.show();
+        await windowManager.focus();
+      },
+    );
+  }
 
   runApp(const MainApp());
 }
@@ -69,8 +90,7 @@ class MainPage extends StatefulWidget {
 }
 
 class MainPageState extends State<MainPage> {
-  final searchFocusNode = FocusNode();
-  final searchController = TextEditingController();
+  final paneHeaderHeight = 28.0;
 
   late final List<PaneItem> items = [
     ...buildFlattened(menuItems),
@@ -78,12 +98,18 @@ class MainPageState extends State<MainPage> {
   ];
   late final List<NavigationPaneItem> menuItems =
       [
-        PaneItemSeparator(),
         PaneItem(
           key: const ValueKey('/app'),
           icon: homeIcon,
           body: const SizedBox.shrink(),
           title: const Text('首页'),
+        ),
+        PaneItemHeader(header: SizedBox(height: 28, child: const Text('便捷工具'))),
+        PaneItem(
+          key: const ValueKey('/toolkit/share'),
+          icon: shareIcon,
+          body: const SizedBox.shrink(),
+          title: const Text('文件分享'),
         ),
         PaneItemHeader(header: SizedBox(height: 28, child: const Text('转换工具'))),
         PaneItem(
@@ -132,13 +158,13 @@ class MainPageState extends State<MainPage> {
         PaneItemHeader(header: SizedBox(height: 28, child: const Text('网络工具'))),
         PaneItem(
           key: const ValueKey('/network/dns'),
-          icon: domainIcon,
+          icon: dnsIcon,
           body: const SizedBox.shrink(),
           title: const Text('域名查询'),
         ),
         PaneItem(
-          key: const ValueKey('/snippet/manual'),
-          icon: manualIcon,
+          key: const ValueKey('/network/port'),
+          icon: portIcon,
           body: const SizedBox.shrink(),
           title: const Text('端口占用查询'),
         ),
@@ -214,33 +240,6 @@ class MainPageState extends State<MainPage> {
     ),
   ];
 
-  late final List<AutoSuggestBoxItem> searchItems =
-      items.map((item) {
-        final text = (item.title as Text).data!;
-        return AutoSuggestBoxItem(
-          label: text,
-          value: text,
-          onSelected: () {
-            item.onTap?.call();
-            searchController.clear();
-            searchFocusNode.unfocus();
-            final view = NavigationView.of(context);
-            if (view.compactOverlayOpen) {
-              view.compactOverlayOpen = false;
-            } else if (view.minimalPaneOpen) {
-              view.minimalPaneOpen = false;
-            }
-          },
-        );
-      }).toList();
-
-  @override
-  void dispose() {
-    searchFocusNode.dispose();
-    searchController.dispose();
-    super.dispose();
-  }
-
   int calcSelected(BuildContext context) {
     for (var i = 0; i < items.length; i++) {
       final item = items[i];
@@ -277,50 +276,66 @@ class MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return NavigationView(
-      appBar: NavigationAppBar(
-        height: appBarHeight,
-        title: const DragToMoveArea(
-          child: Align(
-            alignment: AlignmentDirectional.centerStart,
-            child: Text('Sidecar App'),
+    if (Platform.isMacOS) {
+      return NavigationView(
+        appBar: NavigationAppBar(
+          height: appBarSize,
+          title: const DragToMoveArea(
+            child: Align(
+              alignment: AlignmentDirectional.center,
+              child: Text(appBarTitle),
+            ),
           ),
+          actions: null,
+          automaticallyImplyLeading: false,
         ),
-        actions: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [const MainWindowCaption()],
+        pane: NavigationPane(
+          size: NavigationPaneSize(
+            openWidth: 220,
+            openMinWidth: 220,
+            openMaxWidth: 220,
+          ),
+          displayMode: PaneDisplayMode.open,
+          items: menuItems,
+          footerItems: footerItems,
+          selected: calcSelected(context),
         ),
-        automaticallyImplyLeading: false,
-      ),
-      pane: NavigationPane(
-        size: const NavigationPaneSize(
-          topHeight: 40,
-          headerHeight: 40,
-          openWidth: 220,
-          openMinWidth: 220,
-          openMaxWidth: 220,
+        paneBodyBuilder: (item, child) {
+          return widget.child;
+        },
+      );
+    } else {
+      return NavigationView(
+        appBar: NavigationAppBar(
+          height: appBarSize,
+          title: const DragToMoveArea(
+            child: Align(
+              alignment: AlignmentDirectional.centerStart,
+              child: Text(appBarTitle),
+            ),
+          ),
+          actions: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [const MainWindowCaption()],
+          ),
+          automaticallyImplyLeading: false,
         ),
-        displayMode: PaneDisplayMode.open,
-        autoSuggestBox: Builder(
-          builder: (context) {
-            return AutoSuggestBox(
-              items: searchItems,
-              focusNode: searchFocusNode,
-              controller: searchController,
-              unfocusedColor: Colors.transparent,
-              placeholder: 'Search',
-            );
-          },
+        pane: NavigationPane(
+          size: NavigationPaneSize(
+            openWidth: 220,
+            openMinWidth: 220,
+            openMaxWidth: 220,
+          ),
+          displayMode: PaneDisplayMode.open,
+          items: menuItems,
+          footerItems: footerItems,
+          selected: calcSelected(context),
         ),
-        autoSuggestBoxReplacement: const Icon(FluentIcons.search),
-        items: menuItems,
-        footerItems: footerItems,
-        selected: calcSelected(context),
-      ),
-      paneBodyBuilder: (item, child) {
-        return widget.child;
-      },
-    );
+        paneBodyBuilder: (item, child) {
+          return widget.child;
+        },
+      );
+    }
   }
 }
 
@@ -333,7 +348,7 @@ class MainWindowCaption extends StatelessWidget {
 
     return SizedBox(
       width: 138,
-      height: appBarHeight,
+      height: appBarSize,
       child: WindowCaption(
         brightness: theme.brightness,
         backgroundColor: Colors.transparent,
@@ -355,6 +370,16 @@ final router = GoRouter(
         GoRoute(path: '/', redirect: (context, state) => '/app'),
         GoRoute(path: '/app', builder: (context, state) => AppPage()),
         GoRoute(path: '/setting', builder: (context, state) => SettingPage()),
+
+        // 便捷工具
+        GoRoute(
+          path: '/toolkit/main',
+          builder: (context, state) => ToolkitPage(),
+        ),
+        GoRoute(
+          path: '/toolkit/share',
+          builder: (context, state) => ShareToolkitPage(),
+        ),
 
         // 转换工具
         GoRoute(
@@ -406,8 +431,8 @@ final router = GoRouter(
           builder: (context, state) => DnsNetworkPage(),
         ),
         GoRoute(
-          path: '/network/manual',
-          builder: (context, state) => ManualSnippetPage(),
+          path: '/network/port',
+          builder: (context, state) => PortNetworkPage(),
         ),
 
         // 代码片段

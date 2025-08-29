@@ -64,7 +64,7 @@ class ApkDevelopPageState extends State<ApkDevelopPage> {
                             alignment: Alignment.centerLeft,
                             child: Text('解析结果'),
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 20),
                           Expanded(
                             child: TextBox(
                               minLines: 1,

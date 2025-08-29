@@ -23,11 +23,12 @@ class HashDevelopPageState extends State<HashDevelopPage> {
   final inputCtrl = TextEditingController();
   final outputCtrl = TextEditingController();
 
+
   Future<void> hashFile() async {
     final bin = await App.getHashBin();
-    final result = await Process.run(bin, [inputCtrl.text]);
+    final output = await Process.run(bin, [inputCtrl.text]);
     setState(() {
-      outputCtrl.text = result.stdout;
+      outputCtrl.text = output.stdout;
     });
   }
 
@@ -143,7 +144,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 20),
                           Expanded(
                             child: TextBox(
                               maxLines: null,
@@ -166,7 +167,7 @@ class HashDevelopPageState extends State<HashDevelopPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [Text('输出结果')],
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 20),
                           Expanded(
                             child: TextBox(
                               maxLines: null,

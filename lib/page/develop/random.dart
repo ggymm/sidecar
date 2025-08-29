@@ -21,7 +21,7 @@ class RandomDevelopPageState extends State<RandomDevelopPage> {
       context,
       builder: (context, close) {
         return InfoBar(
-          title: const Text('通知：'),
+          title: const Text(''),
           content: const Text('已复制到剪贴板'),
           action: IconButton(
             icon: const Icon(FluentIcons.clear),

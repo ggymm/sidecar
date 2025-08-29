@@ -13,6 +13,7 @@ class DnsNetworkPage extends StatefulWidget {
 
 class DnsNetworkPageState extends State<DnsNetworkPage> {
   var starting = false;
+
   final domainCtrl = TextEditingController();
   final outputCtrl = TextEditingController();
   final outputScrollCtrl = ScrollController();
@@ -24,7 +25,7 @@ class DnsNetworkPageState extends State<DnsNetworkPage> {
       return;
     }
     try {
-      final uri = Uri.parse("https://$domain");
+      final uri = Uri.parse('https://$domain');
       if (uri.host.isEmpty ||
           (uri.host != domain && !uri.host.endsWith('.$domain'))) {
         return;
@@ -109,6 +110,7 @@ class DnsNetworkPageState extends State<DnsNetworkPage> {
                     Expanded(
                       child: TextBox(
                         maxLines: null,
+                        readOnly: true,
                         controller: outputCtrl,
                         scrollController: outputScrollCtrl,
                       ),

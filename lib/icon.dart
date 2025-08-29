@@ -5,8 +5,8 @@ const size = 20.0;
 
 final Widget homeIcon = SvgPicture.asset(
   'asset/icon/home.svg',
-  width: 18.0,
-  height: 18.0,
+  width: size,
+  height: size,
   colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
   semanticsLabel: 'Home Icon',
 );
@@ -18,6 +18,16 @@ final Widget appsIcon = SvgPicture.asset(
   colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
   semanticsLabel: 'Apps Icon',
 );
+
+/// ========== 转换工具 ==========
+final Widget shareIcon = SvgPicture.asset(
+  'asset/icon/share.svg',
+  width: size,
+  height: size,
+  colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+  semanticsLabel: 'Share Icon',
+);
+
 
 /// ========== 转换工具 ==========
 final Widget base64Icon = SvgPicture.asset(
@@ -78,12 +88,20 @@ final Widget randomIcon = SvgPicture.asset(
 );
 
 /// ========== 网络工具 ==========
-final Widget domainIcon = SvgPicture.asset(
-  'asset/icon/domain.svg',
+final Widget dnsIcon = SvgPicture.asset(
+  'asset/icon/dns.svg',
   width: size,
   height: size,
   colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-  semanticsLabel: 'Domain Icon',
+  semanticsLabel: 'Dns Icon',
+);
+
+final Widget portIcon = SvgPicture.asset(
+  'asset/icon/port.svg',
+  width: size,
+  height: size,
+  colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+  semanticsLabel: 'Port Icon',
 );
 
 /// ========== 代码片段 ==========

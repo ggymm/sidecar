@@ -95,7 +95,7 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
     // Wed, 02 Jan 2000 04:05:06 GMT
     month = months[time.month - 1];
     weekday = weekdays[time.weekday - 1];
-    rfc7231 = "$weekday, $day $month $year $hour:$minute:$second GMT";
+    rfc7231 = '$weekday, $day $month $year $hour:$minute:$second GMT';
 
     // 时区转换
     time = time.add(Duration(minutes: (timezone * 60).round()));
@@ -111,13 +111,13 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
     var zone = formatTimezone(timezone);
     switch (unit) {
       case 1:
-        common = "$year-$month-$day $hour:$minute:$second";
-        iso8601 = "$year-$month-$day\\T$hour:$minute:$second$zone";
+        common = '$year-$month-$day $hour:$minute:$second';
+        iso8601 = '$year-$month-${day}T$hour:$minute:$second$zone';
         break;
       case 1000:
         String millisecond = time.millisecond.toString().padLeft(3, '0');
-        common = "$year-$month-$day $hour:$minute:$second.$millisecond";
-        iso8601 = "$year-$month-$day\\T$hour:$minute:$second.$millisecond$zone";
+        common = '$year-$month-$day $hour:$minute:$second.$millisecond';
+        iso8601 = '$year-$month-${day}T$hour:$minute:$second.$millisecond$zone';
         break;
     }
   }
@@ -127,7 +127,7 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
     final hours = timezone.abs();
     final offsetHour = hours.floor().toString().padLeft(2, '0');
     final offsetMinute = ((hours % 1) * 60).round().toString().padLeft(2, '0');
-    return "$sign$offsetHour:$offsetMinute";
+    return '$sign$offsetHour:$offsetMinute';
   }
 
   @override
@@ -147,7 +147,7 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
   Widget build(BuildContext context) {
     final height = 80.0;
     return ScaffoldPage.scrollable(
-      header: PageHeader(title: const Text('时间戳')),
+      header: PageHeader(title: const Text('时间戳转换')),
       children: [
         SizedBox(
           height: height,
@@ -191,18 +191,18 @@ class TimestampConvertPageState extends State<TimestampConvertPage> {
                             }
                             unit = v;
 
-                            // 修改 input
-                            switch (unit) {
-                              case 1:
-                                input = (input / 1000).toInt();
-                                break;
-                              case 1000:
-                                input = (input * 1000).toInt();
-                                break;
-                            }
-
-                            // 运行格式化方法
-                            runFormat();
+                            // // 修改 input
+                            // switch (unit) {
+                            //   case 1:
+                            //     input = (input / 1000).toInt();
+                            //     break;
+                            //   case 1000:
+                            //     input = (input * 1000).toInt();
+                            //     break;
+                            // }
+                            //
+                            // // 运行格式化方法
+                            // runFormat();
                           });
                         },
                         isExpanded: true,

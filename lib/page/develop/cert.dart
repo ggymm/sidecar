@@ -9,46 +9,32 @@ class CertDevelopPage extends StatefulWidget {
 }
 
 class CertDevelopPageState extends State<CertDevelopPage> {
-  final certNode = FocusNode();
   final certCtrl = TextEditingController();
-
-  final parsedNode = FocusNode();
   final parsedCtrl = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
+  Future<void> parseCert() async {
+    // 解析 x509 证书
+    var text = certCtrl.text;
+    if (!text.isNotEmpty) {
+      return;
+    }
 
-    certNode.addListener(() {
-      // 解析 x509 证书
-      var text = certCtrl.text;
-      if (!text.isNotEmpty) {
-        return;
-      }
-
-      // 如果输入文本包含 字符串的 \n 替换为实际换行符
-      text = text.replaceAll(r'\n', '\n');
-      setState(() {
-        certCtrl.text = text;
-      });
-
-      try {
-        final cert = parsePem(text).first as X509Certificate;
-        setState(() {
-          parsedCtrl.text = cert.toString();
-        });
-      } catch (e) {
-        setState(() {
-          parsedCtrl.text = '解析失败: $e';
-        });
-      }
+    // 如果输入文本包含 字符串的 \n 替换为实际换行符
+    text = text.replaceAll(r'\n', '\n');
+    setState(() {
+      certCtrl.text = text;
     });
-  }
 
-  @override
-  void dispose() {
-    certNode.dispose();
-    super.dispose();
+    try {
+      final cert = parsePem(text).first as X509Certificate;
+      setState(() {
+        parsedCtrl.text = cert.toString();
+      });
+    } catch (e) {
+      setState(() {
+        parsedCtrl.text = '解析失败: $e';
+      });
+    }
   }
 
   @override
@@ -77,13 +63,15 @@ class CertDevelopPageState extends State<CertDevelopPage> {
                             alignment: Alignment.centerLeft,
                             child: Text('证书'),
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 20),
                           Expanded(
                             child: TextBox(
                               minLines: 1,
                               maxLines: null,
-                              focusNode: certNode,
                               controller: certCtrl,
+                              onChanged: (value) {
+                                parseCert();
+                              }
                             ),
                           ),
                         ],
@@ -101,13 +89,12 @@ class CertDevelopPageState extends State<CertDevelopPage> {
                             alignment: Alignment.centerLeft,
                             child: Text('解析结果'),
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 20),
                           Expanded(
                             child: TextBox(
                               minLines: 1,
                               maxLines: null,
                               readOnly: true,
-                              focusNode: parsedNode,
                               controller: parsedCtrl,
                             ),
                           ),

@@ -48,7 +48,11 @@ class ManualSnippetPageState extends State<ManualSnippetPage> {
     }
 
     // 使用 notepad 打开文件
-    await Process.run('notepad', [file.path]);
+    if (Platform.isMacOS) {
+      await Process.run('open', ["-a", "textedit", file.path]);
+    } else if (Platform.isWindows) {
+      await Process.run('notepad', [file.path]);
+    }
   }
 
   @override
