@@ -53,6 +53,9 @@ void main() async {
     );
   }
 
+  ProcessSignal.sigint.watch().listen((signal) async {
+    exit(0);
+  });
   runApp(const MainApp());
 }
 

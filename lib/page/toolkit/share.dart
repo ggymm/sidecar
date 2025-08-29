@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:file_selector/file_selector.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/services.dart';
 import 'package:sidecar/app.dart';
 
 class ShareToolkitPage extends StatefulWidget {
@@ -17,6 +18,25 @@ class ShareToolkitPageState extends State<ShareToolkitPage> {
   String qrcode = '';
   String download = '';
   String filepath = '';
+
+  Future<void> copyUrl() async {
+    Clipboard.setData(ClipboardData(text: download));
+    await displayInfoBar(
+      context,
+      builder: (context, close) {
+        return InfoBar(
+          title: const Text(''),
+          content: const Text('已复制到剪贴板'),
+          action: IconButton(
+            icon: const Icon(FluentIcons.clear),
+            onPressed: close,
+          ),
+          severity: InfoBarSeverity.info,
+        );
+      },
+      alignment: Alignment.topRight,
+    );
+  }
 
   Future<void> serverCtrl() async {
     if (pid == -1) {
@@ -53,11 +73,6 @@ class ShareToolkitPageState extends State<ShareToolkitPage> {
         filepath = '';
       });
     }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override
@@ -150,13 +165,16 @@ class ShareToolkitPageState extends State<ShareToolkitPage> {
                               child:
                                   pid == -1
                                       ? SizedBox.shrink()
-                                      : Padding(
-                                        padding: EdgeInsets.all(20),
-                                        child: Image.network(qrcode),
+                                      : GestureDetector(
+                                        onTap: () {
+                                          copyUrl();
+                                        },
+                                        child: Padding(
+                                          padding: EdgeInsets.all(20),
+                                          child: Image.network(qrcode),
+                                        ),
                                       ),
                             ),
-                            SizedBox(height: 20),
-                            SelectableText(download),
                           ],
                         ),
                       ),

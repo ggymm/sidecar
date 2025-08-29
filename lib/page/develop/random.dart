@@ -30,6 +30,7 @@ class RandomDevelopPageState extends State<RandomDevelopPage> {
           severity: InfoBarSeverity.info,
         );
       },
+      alignment: Alignment.topRight,
     );
   }
 
