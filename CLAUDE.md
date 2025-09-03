@@ -2,84 +2,45 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Overview
+## 项目概述
 
-Sidecar is a Flutter desktop application providing various utility tools. It's a cross-platform desktop app with support for Windows, macOS, and Linux.
+Sidecar 是一个 Flutter 桌面应用，为开发者提供各类实用工具。支持 Windows、macOS 和 Linux 三大平台。
 
-## Development Environment Setup
+## 常用命令
 
-### Flutter Environment (Chinese Mirror)
+### 开发调试
 ```bash
-# Add to ~/.zprofile
-export PUB_HOSTED_URL="https://pub.flutter-io.cn"
-export FLUTTER_STORAGE_BASE_URL="https://storage.flutter-io.cn"
+flutter run                    # 运行开发模式
+flutter pub get                # 安装依赖
+flutter analyze                # 静态代码分析
+flutter test                   # 运行测试（当前无测试文件）
 ```
 
-## Common Commands
-
-### Development
+### 构建发布
 ```bash
-flutter run                    # Run in development mode
-flutter pub get                # Install dependencies
-flutter analyze                # Run static analysis
-flutter test                   # Run tests
+flutter clean                                              # 清理构建产物
+flutter build macos --release --no-tree-shake-icons       # 构建 macOS 版本
+flutter build windows --release                           # 构建 Windows 版本
+flutter build linux --release                             # 构建 Linux 版本
 ```
 
-### Building
-```bash
-flutter build windows --release    # Build Windows release
-flutter build macos --release      # Build macOS release
-flutter build linux --release      # Build Linux release
-```
+## 核心架构
 
-### Icon Generation (macOS)
-```bash
-# Install librsvg first
-brew install librsvg
+### 主要组件
+- **lib/main.dart**: 应用入口，窗口配置和路由设置
+- **lib/app.dart**: 平台检测和原生二进制文件路径管理
+- **lib/page/**: 各功能页面，按类别组织
+- **lib/route/**: 路由定义文件，按功能分类
+- **app/plugin/**: 原生可执行文件（DNS、哈希、二维码、文件分享）
 
-# Generate icons from SVG
-cd macos/Runner/Assets.xcassets/AppIcon.appiconset/
-rsvg-convert -w 16 app_icon.svg > app_icon_16.png
-rsvg-convert -w 32 app_icon.svg > app_icon_32.png
-rsvg-convert -w 64 app_icon.svg > app_icon_64.png
-rsvg-convert -w 128 app_icon.svg > app_icon_128.png
-rsvg-convert -w 256 app_icon.svg > app_icon_256.png
-rsvg-convert -w 512 app_icon.svg > app_icon_512.png
-rsvg-convert -w 1024 app_icon.svg > app_icon_1024.png
-```
+### 原生插件系统
+应用通过 `App` 类管理平台特定的原生二进制文件：
+- 运行时检测操作系统和架构
+- 动态构建 `app/plugin/` 下可执行文件路径
+- 支持开发和生产环境的路径解析
 
-## Project Architecture
-
-### Main Structure
-- **lib/main.dart**: Application entry point with window configuration and routing setup
-- **lib/app.dart**: Core app utilities including platform detection and binary path management
-- **lib/page/**: UI pages organized by feature categories
-- **lib/route/**: Route definitions for different tool categories
-- **app/plugin/**: Native executables for DNS, hash, and QR code operations
-- **app/snippet/**: Code snippets and command manuals
-
-### Navigation Structure
-The app uses a NavigationPane with the following categories:
-- **便捷工具 (Utilities)**: File sharing tools
-- **转换工具 (Convert)**: Base64 encoding, timestamp conversion
-- **开发工具 (Develop)**: Certificate parsing, hashing, crypto, random data, QR codes
-- **网络工具 (Network)**: DNS lookup, port checking
-- **代码片段 (Snippets)**: Code library and command manuals
-
-### Key Dependencies
-- `fluent_ui`: Microsoft Fluent UI components
-- `go_router`: Navigation and routing
-- `window_manager`: Desktop window management
-- Native binaries for specialized operations (DNS, hashing, QR codes)
-
-### Binary Management
-The `App` class handles platform-specific binary discovery:
-- Detects OS and architecture at runtime
-- Constructs paths to native executables in `app/plugin/`
-- Supports development and production environments
-
-### Routing Pattern
-Uses GoRouter with a shell route structure:
-- Main shell provides navigation sidebar
-- Individual routes for each tool page
-- Automatic redirect from root to `/app`
+### UI 框架
+- 使用 Microsoft Fluent UI 组件库
+- 默认暗色主题
+- 自定义字体：更纱黑体 SC
+- 使用 GoRouter 进行导航管理，Shell 路由结构提供侧边栏
