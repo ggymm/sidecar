@@ -26,7 +26,7 @@ class MainFlutterWindow: NSWindow {
       object: self
     )
 
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+    DispatchQueue.main.asyncAfter(deadline: .now()) {
       self.forceButtonPositions()
     }
   }
@@ -53,7 +53,7 @@ class MainFlutterWindow: NSWindow {
     }
 
     let xPos: CGFloat = 6.0
-    let yPos: CGFloat = -6.0
+    let yPos: CGFloat = 0
 
     closeButton.setFrameOrigin(NSPoint(x: 12.0 + xPos, y: yPos))
     miniaturizeButton.setFrameOrigin(NSPoint(x: 32.0 + xPos, y: yPos))

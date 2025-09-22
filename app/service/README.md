@@ -37,7 +37,9 @@ max_allowed_packet=16M
 
 # 使用密码登录
 mysql -uroot -p
+.bin/mysql -uroot -p
 # 0%lW!CW,;S:z
+# hec%iq77jB=b
 
 # 设置新密码
 set password for root@localhost='root';
